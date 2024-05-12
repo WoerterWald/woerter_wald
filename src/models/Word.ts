@@ -1,6 +1,10 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document, models } from 'mongoose';
 
-const wordSchema = new Schema({
+export interface Word extends Document {
+  word: string
+}
+
+const wordSchema = new Schema<Word>({
   word: {
     type: String,
     required: true
@@ -11,6 +15,4 @@ const wordSchema = new Schema({
     timestamps: true,
   })
 
-const Word = model("Word", wordSchema)
-
-export default Word;
+export default models.Word || model<Word>("Word", wordSchema);

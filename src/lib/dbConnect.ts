@@ -6,7 +6,7 @@ declare global {
   };
 }
 
-const MONGODB_URI = process.env.MONGODB_URI!;
+const MONGODB_URI = process.env.MONGODB_URI!.replace('<USER_NAME>', process.env.USER_NAME!).replace('<PASSWORD>', process.env.PASSWORD!);
 
 if (!MONGODB_URI) {
   throw new Error(
