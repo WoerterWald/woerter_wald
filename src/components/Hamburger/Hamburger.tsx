@@ -1,14 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { FaBars } from 'react-icons/fa6';
-import { IoMdClose } from 'react-icons/io';
+import { IoClose } from 'react-icons/io5';
+import useOutsideClick from '../../hooks/useOutsideClick';
 import styles from './hamburger.module.scss';
 
 export const Hamburger = () => {
   const [showModal, setShowModal] = useState(false);
+  const modalRef = useRef(null);
 
   const toggleModal = () => setShowModal(!showModal);
+
+  const handleCloseModal = () => {
+    toggleModal();
+  };
+
+  useOutsideClick(modalRef, handleCloseModal);
 
   return (
     <>
@@ -16,10 +24,10 @@ export const Hamburger = () => {
         <FaBars onClick={toggleModal} className={styles.burgerIcon} />
       </div>
 
-      {!showModal && (
-        <div className={styles.overlay} onClick={toggleModal}>
-          <div className={styles.modal}>
-            <IoMdClose className={styles.closeBtn} onClick={toggleModal} />
+      {showModal && (
+        <div className={styles.overlay}>
+          <div className={styles.modal} ref={modalRef}>
+            <IoClose className={styles.closeBtn} onClick={toggleModal} />
             <ul>
               <li>Regeln</li>
               <li>Ergebnis teilen</li>

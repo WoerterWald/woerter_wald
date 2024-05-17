@@ -9,8 +9,8 @@
 
   .burgerIcon {
     display: inline-block;
-    width: 25px;
-    height: 25px;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
   @include tablet {
@@ -40,8 +40,8 @@
 
     .closeBtn {
       position: absolute;
-      width: 30px;
-      height: 30px;
+      width: 2rem;
+      height: 2rem;
       top: 30px;
       right: 30px;
 
@@ -57,27 +57,28 @@
       justify-content: center;
       gap: $gap-xxl;
       font-weight: 500;
-      margin: auto;
-      width: 50%;
       height: 100%;
+
+      li {
+        padding-left: 2rem;
+        width: 100%;
+      }
     }
   }
 
   @include tablet {
     .modal {
-      height: 130px;
-      width: 230px;
+      height: 10rem;
+      width: 15rem;
       border-bottom-left-radius: $brad-m;
 
       .closeBtn {
-        top: 15px;
-        right: 15px;
+        top: 1rem;
+        right: 1rem;
       }
 
       ul {
         gap: $gap-l;
-        margin-left: 2rem;
-        width: 100%;
       }
     }
   }
