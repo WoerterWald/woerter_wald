@@ -15,7 +15,7 @@ export default function useOutsideClick(ref: any, callback: Function) {
       document.removeEventListener('mousedown', handleOutsideClick);
       document.addEventListener('touchend', handleOutsideClick);
     };
-  }, [callback]);
+  }, [ref, callback]);
 
   return ref;
 }
