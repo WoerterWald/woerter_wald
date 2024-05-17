@@ -1,21 +1,19 @@
-import { useEffect } from 'react';
+import { Dispatch, RefObject, SetStateAction, useEffect } from 'react';
 
-export default function useOutsideClick(ref: any, callback: Function) {
+export const useOutsideClick = (
+  ref: RefObject<HTMLElement>,
+  setOpen: Dispatch<SetStateAction<boolean>>
+) => {
   useEffect(() => {
-    function handleOutsideClick(event: MouseEvent | TouchEvent) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        callback();
+    const handleClick = (e: Event) => {
+      if (ref?.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
       }
-    }
-
-    document.addEventListener('mousedown', handleOutsideClick);
-    document.addEventListener('touchend', handleOutsideClick);
+    };
+    window.addEventListener('click', handleClick);
 
     return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-      document.addEventListener('touchend', handleOutsideClick);
+      window.removeEventListener('click', handleClick);
     };
-  }, [ref, callback]);
-
-  return ref;
-}
+  }, [ref, setOpen]);
+};

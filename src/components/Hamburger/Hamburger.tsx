@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react';
 import { FaBars } from 'react-icons/fa6';
 import { IoClose } from 'react-icons/io5';
-import useOutsideClick from '../../hooks/useOutsideClick';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 import styles from './hamburger.module.scss';
 
 export const Hamburger = () => {
@@ -12,29 +12,21 @@ export const Hamburger = () => {
 
   const toggleModal = () => setShowModal(!showModal);
 
-  const handleCloseModal = () => {
-    toggleModal();
-  };
-
-  useOutsideClick(modalRef, handleCloseModal);
+  useOutsideClick(modalRef, setShowModal);
 
   return (
-    <>
-      <div className={styles.burgerWrapper}>
-        <FaBars onClick={toggleModal} className={styles.burgerIcon} />
-      </div>
+    <div ref={modalRef} className={styles.burgerWrapper}>
+      <FaBars onClick={toggleModal} className={styles.burgerIcon} />
 
       {showModal && (
-        <div className={styles.overlay}>
-          <div className={styles.modal} ref={modalRef}>
-            <IoClose className={styles.closeBtn} onClick={toggleModal} />
-            <ul>
-              <li>Regeln</li>
-              <li>Ergebnis teilen</li>
-            </ul>
-          </div>
+        <div className={styles.modal}>
+          <IoClose className={styles.closeBtn} onClick={toggleModal} />
+          <ul>
+            <li>Regeln</li>
+            <li>Ergebnis teilen</li>
+          </ul>
         </div>
       )}
-    </>
+    </div>
   );
 };

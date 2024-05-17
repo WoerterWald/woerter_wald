@@ -18,68 +18,57 @@
   }
 }
 
-.overlay {
-  position: fixed;
-  z-index: 1;
-  left: 0;
+.modal {
+  position: absolute;
+  right: 0;
   top: 0;
+  height: 10rem;
   width: 100%;
-  height: 100%;
-  /* overflow: auto; */
-  background-color: rgba(0, 0, 0, 0);
+  background-color: $black;
+  border: 2px solid #f4f4f4;
+  color: #f4f4f4;
 
-  .modal {
+  .closeBtn {
     position: absolute;
-    right: 0;
-    top: 0;
-    height: 10rem;
-    width: 100%;
-    background-color: $black;
-    border: 2px solid #f4f4f4;
-    color: #f4f4f4;
+    width: 2rem;
+    height: 2rem;
+    top: 30px;
+    right: 30px;
 
-    .closeBtn {
-      position: absolute;
-      width: 2rem;
-      height: 2rem;
-      top: 30px;
-      right: 30px;
-
-      &:hover {
-        cursor: pointer;
-        color: $white-75;
-      }
-    }
-
-    ul {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: $gap-xxl;
-      font-weight: 500;
-      height: 100%;
-
-      li {
-        padding-left: 2rem;
-        width: 100%;
-      }
+    &:hover {
+      cursor: pointer;
+      color: $white-75;
     }
   }
 
-  @include tablet {
-    .modal {
-      height: 10rem;
-      width: 15rem;
-      border-bottom-left-radius: $brad-m;
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: $gap-xxl;
+    font-weight: 500;
+    height: 100%;
 
-      .closeBtn {
-        top: 1rem;
-        right: 1rem;
-      }
+    li {
+      padding-left: 2rem;
+      width: 100%;
+    }
+  }
+}
 
-      ul {
-        gap: $gap-l;
-      }
+@include tablet {
+  .modal {
+    height: 10rem;
+    width: 15rem;
+    border-bottom-left-radius: $brad-m;
+
+    .closeBtn {
+      top: 1rem;
+      right: 1rem;
+    }
+
+    ul {
+      gap: $gap-l;
     }
   }
 }
