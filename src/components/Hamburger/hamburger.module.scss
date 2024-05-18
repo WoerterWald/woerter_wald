@@ -1,0 +1,74 @@
+@import '../../styles/mediaQueries.scss';
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+
+.burgerWrapper {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+
+  .burgerIcon {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  @include tablet {
+    padding-right: 4rem;
+  }
+}
+
+.modal {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 10rem;
+  width: 100%;
+  background-color: $black;
+  border: 2px solid #f4f4f4;
+  color: #f4f4f4;
+
+  .closeBtn {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    top: 2rem;
+    right: 2rem;
+
+    &:hover {
+      cursor: pointer;
+      color: $white-75;
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: $gap-xxl;
+    font-weight: 500;
+    height: 100%;
+
+    li {
+      padding-left: 2rem;
+      width: 100%;
+    }
+  }
+}
+
+@include tablet {
+  .modal {
+    height: 10rem;
+    width: 15rem;
+    border-bottom-left-radius: $brad-m;
+
+    .closeBtn {
+      top: 1rem;
+      right: 1rem;
+    }
+
+    ul {
+      gap: $gap-l;
+    }
+  }
+}

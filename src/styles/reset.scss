@@ -1,13 +1,15 @@
+@import './mediaQueries.scss';
+
 *,
 *::before,
 *::after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 html,
 body {
-  padding: 0;
-  margin: 0;
   height: 100%;
   line-height: 1.5;
   font-family: var(--font-inter);
@@ -15,6 +17,7 @@ body {
 
 h1 {
   font-family: var(--font-inspiration);
+  font-size: 2.5rem;
 }
 
 a {
@@ -30,4 +33,26 @@ button {
 
 ul {
   list-style-type: none;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 1rem;
+
+  .flexGap {
+    display: none;
+  }
+}
+
+@include tablet {
+  header {
+    margin-top: 1rem;
+    .flexGap {
+      display: block;
+      flex-grow: 1;
+      padding-left: 5rem;
+    }
+  }
 }
