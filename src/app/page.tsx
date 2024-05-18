@@ -1,11 +1,12 @@
 import { Footer } from '@/components/Footer/Footer';
 import { Hamburger } from '@/components/Hamburger/Hamburger';
-import { getWord } from './actions/getWord';
+import { getGame } from './actions/getGame';
 import '../styles/reset.scss';
 
 export default async function Home() {
-  const data = await getWord('ABBA');
-  console.log(data);
+  const game = await getGame();
+  console.log(game);
+
   return (
     <>
       <header>

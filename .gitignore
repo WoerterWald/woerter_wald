@@ -17,8 +17,8 @@
 /build
 
 # woerter JSON
-/scripts/filterWords/words_source.json
-/scripts/filterWords/words_clean.json
+/src/data/words_source.json
+/src/data/words_clean.json
 
 # misc
 .DS_Store
