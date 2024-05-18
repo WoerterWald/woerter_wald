@@ -1,10 +1,12 @@
-import { Schema, model, Document, models } from 'mongoose';
+import { Schema, model, Document, models, Types } from 'mongoose';
 
-export interface Word extends Document {
-  word: string
+export interface WordT extends Document {
+  word: string,
+  gameWords: Types.ObjectId[];
+  gamePanagrams: Types.ObjectId[];
 }
 
-const wordSchema = new Schema<Word>({
+export const wordSchema = new Schema<WordT>({
   word: {
     type: String,
     required: true
@@ -15,4 +17,4 @@ const wordSchema = new Schema<Word>({
     timestamps: true,
   })
 
-export default models.Word || model<Word>("Word", wordSchema);
+export default models.Word || model<WordT>("Word", wordSchema);
