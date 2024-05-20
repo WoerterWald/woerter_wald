@@ -28,7 +28,6 @@ const gameSchema = new Schema<GameT>({
   panagrams: [wordSchema]
 },
   {
-    id: false,
     timestamps: true,
     toJSON: { virtuals: true },
     toObject: { virtuals: true }
