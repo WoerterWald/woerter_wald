@@ -3,28 +3,41 @@
 
 .footer {
   display: flex;
+  flex-wrap: wrap;
+  gap: $gap-s;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 100vw;
   padding: 1rem;
+  font-size: 0.75rem;
 
   a {
     font-weight: bold;
   }
-
-  // @include mobile {
-  //   display: block;
-  // }
 }
 
 .githubLinks {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  gap: $gap-s;
+  margin-right: 1rem;
 
   a {
     display: inline-flex;
     align-items: center;
     gap: $gap-xs;
+
+    svg {
+      flex-shrink: 0;
+    }
   }
+
+  a:last-of-type {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.freepikLinks {
+  text-align: center;
 }

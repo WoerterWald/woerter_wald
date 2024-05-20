@@ -37,22 +37,16 @@ ul {
 
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin: 0.5rem 1rem;
-
-  .flexGap {
-    display: none;
-  }
 }
 
-@include tablet {
-  header {
-    margin-top: 1rem;
-    .flexGap {
-      display: block;
-      flex-grow: 1;
-      padding-left: 5rem;
-    }
+.flexGap {
+  display: none;
+
+  @include tablet {
+    display: block;
+    flex-grow: 1;
   }
 }

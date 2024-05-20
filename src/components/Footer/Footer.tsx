@@ -12,6 +12,7 @@ export const Footer = () => {
           <Github /> pozniej-znajde-wolne-haslo
         </a>
       </div>
+      <div className="flexGap" />
       <div className={styles.freepikLinks}>
         <span>Images by freepik: </span>
         <a href="https://www.freepik.com/free-vector/hand-drawn-flat-design-forest-landscape_19964703.htm#fromView=search&page=1&position=4&uuid=533a0ec0-1993-4903-936d-38005704b3d4">
