@@ -1,3 +1,4 @@
+import * as dotenv from 'dotenv'
 import mongoose, { Mongoose } from "mongoose";
 declare global {
   var mongoose: {
@@ -5,6 +6,8 @@ declare global {
     conn: Mongoose | null;
   };
 }
+
+dotenv.config({ path: './.env.local' })
 
 const MONGODB_URI = process.env.MONGODB_URI!.replace('<USER_NAME>', process.env.USER_NAME!).replace('<PASSWORD>', process.env.PASSWORD!);
 
