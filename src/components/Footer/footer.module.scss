@@ -1,0 +1,30 @@
+@import '../../styles/mediaQueries.scss';
+@import '../../styles/variables.scss';
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  padding: 1rem;
+
+  a {
+    font-weight: bold;
+  }
+
+  // @include mobile {
+  //   display: block;
+  // }
+}
+
+.githubLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: $gap-xs;
+  }
+}
