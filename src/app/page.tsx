@@ -1,6 +1,7 @@
 import { getServerCookie } from '@/utils/cookieHelpers';
 import { Footer } from '@/components/Footer/Footer';
 import { Hamburger } from '@/components/Hamburger/Hamburger';
+import { LetterGrid } from '@/components/LetterGrid/LetterGrid';
 import { getGame } from './actions/getGame';
 import '../styles/reset.scss';
 
@@ -15,6 +16,8 @@ export default async function Home() {
         <h1>WörterWald</h1>
         <Hamburger />
       </header>
+
+      <LetterGrid />
       <Footer />
       {hasCookie && <p>Hello you have returned</p>}
     </>
