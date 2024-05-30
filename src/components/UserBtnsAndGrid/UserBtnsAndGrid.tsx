@@ -34,7 +34,7 @@ export const UserBtnsAndGrid = ({ letters }: UserBtnsAndGridProps) => {
 
       <div className={styles.btnsContainer}>
         <button className={styles.btnBig}>Eingabe</button>
-        <button className={styles.btnSmall} onClick={() => handleShuffle(letters)}>
+        <button className={styles.btnSmall} onClick={() => handleShuffle(gameLetters)}>
           <BiShuffle className={styles.shuffleIcon} />
         </button>
         <button className={styles.btnBig} onClick={resetWordInput}>
