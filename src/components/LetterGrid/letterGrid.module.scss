@@ -9,58 +9,64 @@
   grid-template-rows: repeat(5, 1fr);
   grid-template-columns: repeat(3, 1fr);
 
-  .top,
-  .topLeft,
-  .topRight {
+  :nth-child(1) {
+    /*  grid-row: 3; */
+    grid-column: 2;
+
+    button {
+      color: $white;
+      background-color: $ocher-90;
+      font-size: 2.8rem;
+    }
+  }
+
+  :nth-child(2),
+  :nth-child(3),
+  :nth-child(4) {
     grid-row: -4/1;
   }
 
-  .top {
-    /* grid-row: 1; */
-    grid-column: 2;
-    margin-bottom: 30px;
-  }
-
-  .topLeft {
+  :nth-child(2) {
     /*  grid-row: 2; */
     grid-column: 1;
     align-self: flex-end;
   }
 
-  .topRight {
+  :nth-child(3) {
+    /* grid-row: 1; */
+    grid-column: 2;
+    margin-bottom: 30px;
+  }
+
+  :nth-child(4) {
     /*    grid-row: 2; */
     grid-column: 3;
     align-self: flex-end;
   }
 
-  .center {
-    /*  grid-row: 3; */
-    grid-column: 2;
-  }
-
-  .bottomLeft,
-  .bottomRight,
-  .bottom {
+  :nth-child(5),
+  :nth-child(6),
+  :nth-child(7) {
     grid-row: -1/4;
   }
 
-  .bottomLeft {
+  :nth-child(5) {
     /* grid-row: 4; */
     grid-column: 1;
     align-self: flex-start;
   }
 
-  .bottomRight {
-    /*  grid-row: 4; */
-    grid-column: 3;
-    align-self: flex-start;
-  }
-
-  .bottom {
+  :nth-child(6) {
     /*  grid-row: 5; */
     grid-column: 2;
     align-self: center;
     margin-top: 30px;
+  }
+
+  :nth-child(7) {
+    /*  grid-row: 4; */
+    grid-column: 3;
+    align-self: flex-start;
   }
 
   .flex {
@@ -75,15 +81,6 @@
     font-size: 2rem;
     font-weight: 600;
     border-radius: 100%;
-  }
-
-  .mainLetter {
-    color: $white;
-    background-color: $ocher-90;
-    font-size: 2.8rem;
-  }
-
-  .secondaryLetters {
     background-color: $white;
   }
 
