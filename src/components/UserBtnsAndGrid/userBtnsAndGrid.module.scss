@@ -1,0 +1,45 @@
+@import '../../styles/mediaQueries.scss';
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+
+.currentInput {
+  width: 320px;
+  text-align: center;
+  margin: 1rem auto;
+}
+
+.btnsContainer {
+  width: 320px;
+  margin: 3rem auto;
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    color: $black;
+    background-color: $white;
+    border: 1.5px solid $black;
+    border-radius: $brad-m;
+    height: 2.7rem;
+  }
+
+  .btnBig {
+    width: 33%;
+    font-weight: 700;
+  }
+
+  .btnSmall {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+
+    .shuffleIcon {
+      align-self: center;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  @include tablet {
+    width: 400px;
+  }
+}
