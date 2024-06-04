@@ -2,30 +2,24 @@
 
 import { useState } from 'react';
 import { BiShuffle } from 'react-icons/bi';
+import { handleShuffle } from '@/utils/handleShuffle';
 import { LetterGrid } from '../LetterGrid/LetterGrid';
-import styles from './userBtnsAndGrid.module.scss';
+import styles from './game.module.scss';
 
-type UserBtnsAndGridProps = {
+type GameProps = {
   letters: string[];
 };
 
-export const UserBtnsAndGrid = ({ letters }: UserBtnsAndGridProps) => {
+export const Game = ({ letters }: GameProps) => {
   const [gameLetters, setGameLetters] = useState(letters);
   const [wordInput, setWordInput] = useState('');
 
   const resetWordInput = () => setWordInput(wordInput.slice(0, -1));
 
-  /* Durstenfeld shuffle algorithm (optimized version of Fisher-Yates) */
-  const handleShuffle = (arr: string[]) => {
-    const shuffleArr = arr.slice(1);
-    for (let i = shuffleArr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffleArr[i], shuffleArr[j]] = [shuffleArr[j], shuffleArr[i]];
-    }
-    setGameLetters(arr.slice(0, 1).concat(shuffleArr));
+  const shuffleLetters = () => {
+    const shuffled = handleShuffle(gameLetters);
+    setGameLetters(shuffled);
   };
-
-  console.log(wordInput);
 
   return (
     <div>
@@ -34,7 +28,7 @@ export const UserBtnsAndGrid = ({ letters }: UserBtnsAndGridProps) => {
 
       <div className={styles.btnsContainer}>
         <button className={styles.btnBig}>Eingabe</button>
-        <button className={styles.btnSmall} onClick={() => handleShuffle(gameLetters)}>
+        <button className={styles.btnSmall} onClick={shuffleLetters}>
           <BiShuffle className={styles.shuffleIcon} />
         </button>
         <button className={styles.btnBig} onClick={resetWordInput}>
