@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { BiShuffle } from 'react-icons/bi';
 import { handleShuffle } from '@/utils/handleShuffle';
+import { Button } from '../Button/Button';
 import { LetterGrid } from '../LetterGrid/LetterGrid';
 import styles from './game.module.scss';
 
@@ -14,12 +15,17 @@ export const Game = ({ letters }: GameProps) => {
   const [gameLetters, setGameLetters] = useState(letters);
   const [wordInput, setWordInput] = useState('');
 
-  const resetWordInput = () => setWordInput(wordInput.slice(0, -1));
+  const submitWord = () => {
+    console.log(wordInput);
+    setWordInput('');
+  };
 
   const shuffleLetters = () => {
     const shuffled = handleShuffle(gameLetters);
     setGameLetters(shuffled);
   };
+
+  const resetWordInput = () => setWordInput(wordInput.slice(0, -1));
 
   return (
     <div>
@@ -27,13 +33,15 @@ export const Game = ({ letters }: GameProps) => {
       <LetterGrid gameLetters={gameLetters} setWordInput={setWordInput} />
 
       <div className={styles.btnsContainer}>
-        <button className={styles.btnBig}>Eingabe</button>
-        <button className={styles.btnSmall} onClick={shuffleLetters}>
-          <BiShuffle className={styles.shuffleIcon} />
-        </button>
-        <button className={styles.btnBig} onClick={resetWordInput}>
+        <Button size="large" onClick={submitWord}>
+          Eingabe
+        </Button>
+        <Button size="small" onClick={shuffleLetters}>
+          <BiShuffle />
+        </Button>
+        <Button size="large" onClick={resetWordInput}>
           Löschen
-        </button>
+        </Button>
       </div>
     </div>
   );
