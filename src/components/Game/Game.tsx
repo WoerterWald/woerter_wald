@@ -3,15 +3,17 @@
 import { useState } from 'react';
 import { BiShuffle } from 'react-icons/bi';
 import { handleShuffle } from '@/utils/handleShuffle';
+import { GameT } from '@/models/Game';
 import { Button } from '../Button/Button';
 import { LetterGrid } from '../LetterGrid/LetterGrid';
 import styles from './game.module.scss';
 
 type GameProps = {
-  letters: string[];
+  game: GameT;
 };
 
-export const Game = ({ letters }: GameProps) => {
+export const Game = ({ game }: GameProps) => {
+  const { letters } = game;
   const [gameLetters, setGameLetters] = useState(letters);
   const [wordInput, setWordInput] = useState('');
 

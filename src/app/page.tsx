@@ -7,12 +7,12 @@ import '../styles/reset.scss';
 
 export default async function Home() {
   const game = await getGame();
-  const hasCookie = await getServerCookie(game.id);
+  const hasCookie = await getServerCookie(game._id);
 
   return (
     <>
       <Header />
-      <Game letters={game.letters} />
+      <Game game={game} />
       <Footer />
       {hasCookie && <p>Hello you have returned</p>}
     </>
