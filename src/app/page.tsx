@@ -1,7 +1,7 @@
 import { getServerCookie } from '@/utils/cookieHelpers';
 import { Footer } from '@/components/Footer/Footer';
 import { Game } from '@/components/Game/Game';
-import { Hamburger } from '@/components/Hamburger/Hamburger';
+import { Header } from '@/components/Header/Header';
 import { getGame } from './actions/getGame';
 import '../styles/reset.scss';
 
@@ -11,12 +11,7 @@ export default async function Home() {
 
   return (
     <>
-      <header>
-        <div className="flexGap" />
-        <h1>WörterWald</h1>
-        <Hamburger />
-      </header>
-
+      <Header />
       <Game letters={game.letters} />
       <Footer />
       {hasCookie && <p>Hello you have returned</p>}
