@@ -10,12 +10,12 @@
 }
 
 .btnsContainer {
-  width: 320px;
+  max-width: 320px;
   margin: 3rem auto;
   display: flex;
   justify-content: space-between;
 
   @include tablet {
-    width: 400px;
+    max-width: 400px;
   }
 }
