@@ -1,26 +1,28 @@
+'use client';
+
 import { useRef } from 'react';
-import { Dispatch, SetStateAction } from 'react';
 import { IoClose } from 'react-icons/io5';
+import { useRouter } from 'next/navigation';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import styles from './modal.module.scss';
 
 type ModalProps = {
-  handleCloseModal: () => void;
-  /*   setGameRules: Dispatch<SetStateAction<boolean>>; */
   children: React.ReactNode;
 };
 
-export const Modal = ({ handleCloseModal, /* setGameRules, */ children }: ModalProps) => {
-  /* const xRef = useRef(null);
+export const Modal = ({ children }: ModalProps) => {
+  const router = useRouter();
+  const ref = useRef<HTMLDivElement>(null);
 
-  useOutsideClick(xRef, setGameRules); */
+  const handleCloseModal = () => router.back();
+
+  useOutsideClick(ref, handleCloseModal);
 
   return (
-    <div /* ref={xRef}  */ className={styles.overlay}>
-      <div className={styles.modalWrapper}>
+    <div className={styles.modalWrapper}>
+      <div ref={ref} className={styles.modal}>
         <IoClose className={styles.closeBtn} onClick={handleCloseModal} />
-
-        <div className={styles.modal}>{children}</div>
+        <div className={styles.modalContent}>{children}</div>
       </div>
     </div>
   );

@@ -3,39 +3,36 @@
 import { useRef, useState } from 'react';
 import { FaBars } from 'react-icons/fa6';
 import { IoClose } from 'react-icons/io5';
+import Link from 'next/link';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
-import { Rules } from '../Rules/Rules';
 import styles from './hamburger.module.scss';
 
 export const Hamburger = () => {
   const [showModal, setShowModal] = useState(false);
-  const [gameRules, setGameRules] = useState(false);
   const modalRef = useRef(null);
 
-  const toggleModal = () => setShowModal(!showModal);
+  const open = () => setShowModal(true);
+  const close = () => setShowModal(false);
 
-  const toggleGameRules = () => {
-    setGameRules(!gameRules);
-    setShowModal(false);
-  };
-
-  useOutsideClick(modalRef, setShowModal);
+  useOutsideClick(modalRef, close);
 
   return (
     <div ref={modalRef} className={styles.burgerWrapper}>
-      <FaBars onClick={toggleModal} className={styles.burgerIcon} />
+      <FaBars onClick={open} className={styles.burgerIcon} />
 
       {showModal && (
         <div className={styles.modal}>
-          <IoClose className={styles.closeBtn} onClick={toggleModal} />
+          <IoClose className={styles.closeBtn} onClick={close} />
           <ul>
-            <li onClick={toggleGameRules}>Regeln</li>
+            <li>
+              <Link href="/rules" onClick={close}>
+                Regeln
+              </Link>
+            </li>
             <li>Ergebnis teilen</li>
           </ul>
         </div>
       )}
-
-      {gameRules && <Rules toggleGameRules={toggleGameRules} /* setGameRules={setGameRules} */ />}
     </div>
   );
 };

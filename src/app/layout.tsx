@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { Inspiration, Inter } from 'next/font/google';
 
@@ -15,12 +16,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  rules,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
+  rules: ReactNode;
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${inspiration.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        {rules}
+      </body>
     </html>
   );
 }
