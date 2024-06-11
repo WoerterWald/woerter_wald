@@ -4,13 +4,26 @@ import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { BiShuffle } from 'react-icons/bi';
 import { handleShuffle } from '@/utils/handleShuffle';
-import { GameT } from '@/models/Game';
 import { Button } from '../Button/Button';
 import { LetterGrid } from '../LetterGrid/LetterGrid';
 import styles from './game.module.scss';
 
+/* import { GameT } from '@/models/Game'; */
+
+type Word = {
+  word: string;
+};
+
+type Game = {
+  letters: string[];
+  levelScores: number[];
+  totalScore: number;
+  matchedWords: Word[];
+  panagrams: Word[];
+};
+
 type GameProps = {
-  game: GameT;
+  game: Game;
 };
 
 export const Game = ({ game }: GameProps) => {
@@ -18,13 +31,20 @@ export const Game = ({ game }: GameProps) => {
   const [gameLetters, setGameLetters] = useState(letters);
   const [wordInput, setWordInput] = useState('');
 
+  const matches = matchedWords.filter((word) => word.word.toLowerCase().includes('u')); // include the filter in 'filterWords' ??
+
   const submitWord = () => {
+    const match = matches.find((word) => wordInput.toLowerCase() === word.word.toLowerCase());
+
     if (wordInput.length < 4) {
       toast.error('Word too short!', { icon: '🦊' });
     } else if (!wordInput.includes(gameLetters[0])) {
       toast.error('Main letter missing!', { icon: '🐛' });
+    } else if (!match) {
+      toast.error('Not in the list :(', { icon: '🍂' });
+    } else {
+      toast.success('You found a word!', { icon: '🐸' });
     }
-    // add toast for success && 'nicht in der liste"
 
     setWordInput('');
   };
