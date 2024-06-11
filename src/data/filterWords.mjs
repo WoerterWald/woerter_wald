@@ -7,6 +7,7 @@ const filterWords = () => {
     if (regex.test(word) && word.length > 3) {
       return { word }
     }
+   
   }).filter(Boolean)
 
   fs.writeFileSync("./src/data/words_clean.json", JSON.stringify(filtered))
