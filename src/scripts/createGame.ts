@@ -1,32 +1,34 @@
-import { generateLetters } from '../utils/generateLetters';
 import dbConnect from '../lib/dbConnect';
 import Game from '../models/Game';
 import Word, { WordT } from '../models/Word';
+import { generateLetters } from '../utils/generateLetters';
 
 const calcLevels = (words: WordT[], panagrams: WordT[]) => {
-  const totalWordLength = words.reduce((acc, curr) => acc + curr.word.length, 0)
+  const totalWordLength = words.reduce((acc, curr) => acc + curr.word.length, 0);
   // const averageWordLength = totalWordLength / words.length
-  const panagramScore = panagrams.reduce((acc, curr) => acc + (curr.word.length + 7), 0)
+  const panagramScore = panagrams.reduce((acc, curr) => acc + (curr.word.length + 7), 0);
 
-  const score = Math.ceil((totalWordLength + panagramScore) / ((words.length + panagrams.length) * 0.5))
+  const score = Math.ceil(
+    (totalWordLength + panagramScore) / ((words.length + panagrams.length) * 0.5)
+  );
   const levelScores: number[] = [];
   const numberOfLevels = 9;
   const difficultyFactor = 1.75;
-  let levelAcc = 0
+  let levelAcc = 0;
   for (let i = 1; i <= numberOfLevels; i++) {
-    const nextLevel = Math.round(score * (1 - Math.exp(-i / difficultyFactor)))
-    levelAcc += nextLevel
+    const nextLevel = Math.round(score * (1 - Math.exp(-i / difficultyFactor)));
+    levelAcc += nextLevel;
     levelScores.push(levelAcc);
   }
-  const totalScore = levelScores[levelScores.length - 1]
+  const totalScore = levelScores[levelScores.length - 1];
 
-  return { totalScore, levelScores }
-}
+  return { totalScore, levelScores };
+};
 
 const createGame = async (iteration = 0): Promise<void> => {
   const letters = generateLetters();
   const split = letters.join('').toLowerCase();
-  const regexPattern = new RegExp(`^[${split}]+$`, 'i');
+  const regexPattern = new RegExp(`^(?=.*${split[0]})[${split}]+$`, 'i');
 
   await dbConnect();
 
@@ -46,11 +48,11 @@ const createGame = async (iteration = 0): Promise<void> => {
 
     if (panagrams.length <= 0) {
       const nextIteration = iteration + 1;
-      console.log(`No panagrams found starting next iteration: ${nextIteration}`)
+      console.log(`No panagrams found starting next iteration: ${nextIteration}`);
       return createGame(nextIteration);
     } else {
-      console.log(words[0], panagrams[0])
-      const { totalScore, levelScores } = calcLevels(words, panagrams)
+      console.log(words[0], panagrams[0]);
+      const { totalScore, levelScores } = calcLevels(words, panagrams);
 
       await Game.create({
         letters,
@@ -60,12 +62,14 @@ const createGame = async (iteration = 0): Promise<void> => {
         panagrams: panagrams,
       });
 
-      console.log(`Successfully created new game 🎉 \n`)
-      console.log(`Letters: ${letters.join(", ")},\nWords: ${words.length},\nPanagrams: ${panagrams.length}`)
+      console.log(`Successfully created new game 🎉 \n`);
+      console.log(
+        `Letters: ${letters.join(', ')},\nWords: ${words.length},\nPanagrams: ${panagrams.length}`
+      );
     }
   } catch (error) {
-    console.error("Failed to create game: ", error)
+    console.error('Failed to create game: ', error);
   }
 };
 
-createGame().then(() => process.exit())
+createGame().then(() => process.exit());
