@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import styles from './button.module.scss';
 
 const classNames = require('classnames');
@@ -5,7 +6,7 @@ const classNames = require('classnames');
 type ButtonProps = {
   size: 'small' | 'large';
   onClick: () => void;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export const Button = ({ size, onClick, children }: ButtonProps) => {

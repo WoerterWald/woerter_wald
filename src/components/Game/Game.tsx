@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import { BiShuffle } from 'react-icons/bi';
 import { handleShuffle } from '@/utils/handleShuffle';
 import { GameT } from '@/models/Game';
@@ -13,12 +14,18 @@ type GameProps = {
 };
 
 export const Game = ({ game }: GameProps) => {
-  const { letters } = game;
+  const { letters, matchedWords } = game;
   const [gameLetters, setGameLetters] = useState(letters);
   const [wordInput, setWordInput] = useState('');
 
   const submitWord = () => {
-    console.log(wordInput);
+    if (wordInput.length < 4) {
+      toast.error('Word too short!', { icon: '🦊' });
+    } else if (!wordInput.includes(gameLetters[0])) {
+      toast.error('Main letter missing!', { icon: '🐛' });
+    }
+    // add toast for success && 'nicht in der liste"
+
     setWordInput('');
   };
 
@@ -31,6 +38,12 @@ export const Game = ({ game }: GameProps) => {
 
   return (
     <div>
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          style: { marginTop: '3rem', background: '#F4F4F4', border: '1px solid #333333' },
+        }}
+      />
       <p className={styles.currentInput}>{wordInput}</p>
       <LetterGrid gameLetters={gameLetters} setWordInput={setWordInput} />
 

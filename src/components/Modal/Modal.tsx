@@ -1,13 +1,14 @@
 'use client';
 
 import { useRef } from 'react';
+import { ReactNode } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { useRouter } from 'next/navigation';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import styles from './modal.module.scss';
 
 type ModalProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export const Modal = ({ children }: ModalProps) => {
