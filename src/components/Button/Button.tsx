@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
+import classNames from 'classnames';
 import styles from './button.module.scss';
-
-const classNames = require('classnames');
 
 type ButtonProps = {
   size: 'small' | 'large';

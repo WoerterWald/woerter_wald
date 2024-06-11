@@ -1,9 +1,8 @@
 'use client';
 
 import { Dispatch, SetStateAction } from 'react';
+import classNames from 'classnames';
 import styles from './letterGrid.module.scss';
-
-const classNames = require('classnames');
 
 type LetterGridProps = {
   gameLetters: string[];
