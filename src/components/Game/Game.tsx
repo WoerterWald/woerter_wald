@@ -30,11 +30,17 @@ export const Game = ({ game }: GameProps) => {
   const { letters, matchedWords } = game;
   const [gameLetters, setGameLetters] = useState(letters);
   const [wordInput, setWordInput] = useState('');
+  const [foundWords, setFoundWords] = useState([]);
 
-  const matches = matchedWords.filter((word) => word.word.toLowerCase().includes('u')); // include the filter in 'filterWords' ??
+  const matchesWithMainLetter = matchedWords.filter((word) =>
+    word.word.toLowerCase().includes(gameLetters[0].toLowerCase())
+  ); // include the filter in 'filterWords' or sth ?
 
+  console.log(matchesWithMainLetter);
   const submitWord = () => {
-    const match = matches.find((word) => wordInput.toLowerCase() === word.word.toLowerCase());
+    const match = matchesWithMainLetter.find(
+      (word) => wordInput.toLowerCase() === word.word.toLowerCase()
+    );
 
     if (wordInput.length < 4) {
       toast.error('Word too short!', { icon: '🦊' });
@@ -44,6 +50,8 @@ export const Game = ({ game }: GameProps) => {
       toast.error('Not in the list :(', { icon: '🍂' });
     } else {
       toast.success('You found a word!', { icon: '🐸' });
+
+      /* setFoundWords((prev) => [...prev, wordInput]); */
     }
 
     setWordInput('');
