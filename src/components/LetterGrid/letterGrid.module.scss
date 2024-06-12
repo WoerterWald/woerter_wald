@@ -1,10 +1,20 @@
 @import '../../styles/mediaQueries.scss';
 @import '../../styles/colors.scss';
 
+.gridWrapper {
+  position: relative;
+  width: fit-content;
+  margin: auto;
+}
+
+.toastBase {
+  min-width: max-content;
+  background: '#F4F4F4';
+  border: '1px solid #333333';
+}
+
 .gridContainer {
   background-color: rgb(151, 137, 45);
-  width: 320px;
-  margin: auto;
   display: grid;
   grid-template-rows: repeat(5, 1fr);
   grid-template-columns: repeat(3, 1fr);
