@@ -28,6 +28,7 @@ export const Game = ({ game }: GameProps) => {
   const { letters, matchedWords } = game;
   const [gameLetters, setGameLetters] = useState(letters);
   const [wordInput, setWordInput] = useState('');
+  const [foundWords, setFoundWords] = useState<string[]>([]);
 
   const submitWord = () => {
     const match = matchedWords.find(
@@ -42,8 +43,7 @@ export const Game = ({ game }: GameProps) => {
       toast.error('Not in the list :(', { icon: '🍂' });
     } else {
       toast.success('You found a word!', { icon: '🐸' });
-
-      /* setFoundWords((prev) => [...prev, wordInput]); */
+      setFoundWords((prev) => [...prev, wordInput]);
     }
 
     setWordInput('');

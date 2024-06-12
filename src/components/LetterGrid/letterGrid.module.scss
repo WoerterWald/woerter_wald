@@ -22,12 +22,6 @@
   :nth-child(1) {
     /*  grid-row: 3; */
     grid-column: 2;
-
-    button {
-      color: $white;
-      background-color: $ocher-90;
-      font-size: 2.8rem;
-    }
   }
 
   :nth-child(2),
@@ -77,21 +71,6 @@
     /*  grid-row: 4; */
     grid-column: 3;
     align-self: flex-start;
-  }
-
-  .flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .letter {
-    width: 4.5rem;
-    height: 4.5rem;
-    font-size: 2rem;
-    font-weight: 600;
-    border-radius: 100%;
-    background-color: $white;
   }
 
   @include tablet {
