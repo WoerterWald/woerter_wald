@@ -8,8 +8,6 @@ import { Button } from '../Button/Button';
 import { LetterGrid } from '../LetterGrid/LetterGrid';
 import styles from './game.module.scss';
 
-/* import { GameT } from '@/models/Game'; */
-
 type Word = {
   word: string;
 };
@@ -30,16 +28,10 @@ export const Game = ({ game }: GameProps) => {
   const { letters, matchedWords } = game;
   const [gameLetters, setGameLetters] = useState(letters);
   const [wordInput, setWordInput] = useState('');
-  const [foundWords, setFoundWords] = useState([]);
 
-  const matchesWithMainLetter = matchedWords.filter((word) =>
-    word.word.toLowerCase().includes(gameLetters[0].toLowerCase())
-  ); // include the filter in 'filterWords' or sth ?
-
-  console.log(matchesWithMainLetter);
   const submitWord = () => {
-    const match = matchesWithMainLetter.find(
-      (word) => wordInput.toLowerCase() === word.word.toLowerCase()
+    const match = matchedWords.find(
+      (match) => wordInput.toLowerCase() === match.word.toLowerCase()
     );
 
     if (wordInput.length < 4) {
@@ -66,12 +58,6 @@ export const Game = ({ game }: GameProps) => {
 
   return (
     <div>
-      <Toaster
-        position="top-center"
-        toastOptions={{
-          style: { marginTop: '3rem', background: '#F4F4F4', border: '1px solid #333333' },
-        }}
-      />
       <p className={styles.currentInput}>{wordInput}</p>
       <LetterGrid gameLetters={gameLetters} setWordInput={setWordInput} />
 
