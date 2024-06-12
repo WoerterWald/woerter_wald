@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction } from 'react';
 import { Toaster } from 'react-hot-toast';
-import classNames from 'classnames';
+import { LetterBtn } from '../LetterBtn/LetterBtn';
 import styles from './letterGrid.module.scss';
 
 type LetterGridProps = {
@@ -24,17 +24,13 @@ export const LetterGrid = ({ gameLetters, setWordInput }: LetterGridProps) => {
         }}
       />
       <div className={styles.gridContainer}>
-        {gameLetters.map((letter) => (
-          <div className={styles.flex} key={letter}>
-            <button
-              className={classNames(styles.letter, styles.flex)}
-              value={letter}
-              onClick={handleUserInput}
-            >
-              {letter}
-            </button>
-          </div>
-        ))}
+        {gameLetters.map((letter) =>
+          letter === gameLetters[0] ? (
+            <LetterBtn variant="primary" key={letter} letter={letter} onClick={handleUserInput} />
+          ) : (
+            <LetterBtn variant="secondary" key={letter} letter={letter} onClick={handleUserInput} />
+          )
+        )}
       </div>
     </div>
   );
