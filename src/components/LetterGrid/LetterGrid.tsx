@@ -15,7 +15,6 @@ export const LetterGrid = ({ gameLetters, setWordInput }: LetterGridProps) => {
     setWordInput((prev) => prev + e.target.value);
   };
 
-  /* const isPrimary=letter===gameLetters[0] */
   return (
     <div className={styles.gridWrapper}>
       <Toaster

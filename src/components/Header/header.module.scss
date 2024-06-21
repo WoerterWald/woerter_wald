@@ -1,0 +1,12 @@
+@import '@/styles/colors.scss';
+@import '@/styles/variables.scss';
+
+.header {
+  position: fixed;
+  width: 100%;
+  height: $heightRunningSection;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: $gap-m;
+}

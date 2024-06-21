@@ -2,20 +2,92 @@
 @import '@/styles/variables.scss';
 @import '@/styles/colors.scss';
 
+.game {
+  position: relative;
+  max-width: $maxWidthMainContainer;
+  height: calc(100vh - $heightRunningSection * 2);
+  margin: $heightRunningSection auto 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: $gap-l;
+  padding: $gap-m;
+}
+
 .currentInput {
-  width: 320px;
-  height: 1rem;
+  font-size: 1.8rem;
+  font-weight: bold;
   text-align: center;
-  margin: 1rem auto;
+  padding: 0.25rem;
+  color: $white;
+  background-color: rgba($color: $white, $alpha: 0.2);
+  border: none;
+  border-radius: $brad-sm;
+  cursor: default;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .btnsContainer {
-  max-width: 320px;
-  margin: 3rem auto;
   display: flex;
   justify-content: space-between;
+  margin-top: 1rem;
+}
 
-  @include tablet {
-    max-width: 400px;
+@mixin posAbsolute {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.bgTop {
+  @include posAbsolute();
+  max-height: 15vw;
+  min-height: 15rem;
+  object-fit: cover;
+}
+.topAnimation {
+  animation: zoomInTop 1.25s ease-in-out;
+}
+.bgCenter {
+  @include posAbsolute();
+  background: url(../../assets/bg_layer_center.webp) center center/cover no-repeat;
+  z-index: -2;
+  transform: scale(1);
+}
+.centerAnimation {
+  animation: zoomInCenter 1.25s ease-in-out;
+}
+.bgMain {
+  @include posAbsolute();
+  width: 150%;
+  left: -25%;
+  background: url(../../assets/bg_layer_background.webp) center center/cover no-repeat;
+  z-index: -3;
+}
+.mainAnimation {
+  animation: zoomInMain 1.25s ease-in-out;
+}
+
+@keyframes zoomInTop {
+  50% {
+    transform: scale(1.1) translateY(-15%);
+  }
+}
+
+@keyframes zoomInCenter {
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes zoomInMain {
+  50% {
+    transform: scale(1.2);
   }
 }
