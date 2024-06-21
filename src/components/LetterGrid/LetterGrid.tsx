@@ -15,6 +15,7 @@ export const LetterGrid = ({ gameLetters, setWordInput }: LetterGridProps) => {
     setWordInput((prev) => prev + e.target.value);
   };
 
+  /* const isPrimary=letter===gameLetters[0] */
   return (
     <div className={styles.gridWrapper}>
       <Toaster
@@ -24,13 +25,17 @@ export const LetterGrid = ({ gameLetters, setWordInput }: LetterGridProps) => {
         }}
       />
       <div className={styles.gridContainer}>
-        {gameLetters.map((letter) =>
-          letter === gameLetters[0] ? (
-            <LetterBtn variant="primary" key={letter} letter={letter} onClick={handleUserInput} />
-          ) : (
-            <LetterBtn variant="secondary" key={letter} letter={letter} onClick={handleUserInput} />
-          )
-        )}
+        {gameLetters.map((letter) => {
+          const isPrimary = letter === gameLetters[0];
+          return (
+            <LetterBtn
+              variant={isPrimary ? 'primary' : 'secondary'}
+              key={letter}
+              letter={letter}
+              onClick={handleUserInput}
+            />
+          );
+        })}
       </div>
     </div>
   );
