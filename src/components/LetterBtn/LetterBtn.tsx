@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import styles from './letterBtn.module.scss';
 
 type LetterBtnProps = {
-  variant: string;
+  variant: 'primary' | 'secondary';
   letter: string;
   onClick: (event: MouseEvent<HTMLElement>) => void;
 };
