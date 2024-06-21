@@ -1,4 +1,5 @@
 @import './mediaQueries.scss';
+@import './colors.scss';
 
 *,
 *::before,
@@ -14,6 +15,11 @@ body {
   line-height: 1.5;
   font-family: var(--font-inter);
   overflow: hidden;
+  color: $white;
+}
+
+body {
+  position: relative;
 }
 
 h1 {
@@ -34,13 +40,6 @@ button {
 
 ul {
   list-style-type: none;
-}
-
-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0.5rem 1rem;
 }
 
 .flexGap {
