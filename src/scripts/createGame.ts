@@ -4,18 +4,23 @@ import Word, { WordT } from '../models/Word';
 import { generateLetters } from '../utils/generateLetters';
 
 const calcLevels = (words: WordT[], panagrams: WordT[]) => {
-  /*  const totalWordLength = words.reduce((acc, curr) => acc + curr.word.length, 0); */
-  const shortWords = words.filter((obj) => obj.word.length === 4);
-  const longWords = words
-    .filter((obj) => obj.word.length > 4)
-    .reduce((acc, curr) => acc + curr.word.length, 0);
+  let shortWordScore = 0;
+  let longWordScore = 0;
 
-  const totalWordLength = longWords + shortWords.length;
+  for (const word of words) {
+    if (word.word.length === 4) {
+      shortWordScore++;
+    } else {
+      longWordScore += word.word.length;
+    }
+  }
+
+  const totalWordScore = longWordScore + shortWordScore;
   // const averageWordLength = totalWordLength / words.length
   const panagramScore = panagrams.reduce((acc, curr) => acc + (curr.word.length + 7), 0);
 
   const score = Math.ceil(
-    (totalWordLength + panagramScore) / ((words.length + panagrams.length) * 0.5)
+    (totalWordScore + panagramScore) / ((words.length + panagrams.length) * 0.5)
   );
   const levelScores: number[] = [];
   const numberOfLevels = 9;
