@@ -4,7 +4,13 @@ import Word, { WordT } from '../models/Word';
 import { generateLetters } from '../utils/generateLetters';
 
 const calcLevels = (words: WordT[], panagrams: WordT[]) => {
-  const totalWordLength = words.reduce((acc, curr) => acc + curr.word.length, 0);
+  /*  const totalWordLength = words.reduce((acc, curr) => acc + curr.word.length, 0); */
+  const shortWords = words.filter((obj) => obj.word.length === 4);
+  const longWords = words
+    .filter((obj) => obj.word.length > 4)
+    .reduce((acc, curr) => acc + curr.word.length, 0);
+
+  const totalWordLength = longWords + shortWords.length;
   // const averageWordLength = totalWordLength / words.length
   const panagramScore = panagrams.reduce((acc, curr) => acc + (curr.word.length + 7), 0);
 
