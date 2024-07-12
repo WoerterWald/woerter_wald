@@ -63,19 +63,18 @@ export const Game = ({ game }: GameProps) => {
     );
 
     if (wordInput.length < 4) {
-      toast.error('Word too short!', { icon: '🦊' });
+      toast.error('Wort zu kurz', { icon: '🦊' });
     } else if (!wordInput.includes(gameLetters[0])) {
-      toast.error('Main letter missing!', { icon: '🐛' });
+      toast.error('Hauptbuchstabe fehlt', { icon: '🐛' });
     } else if (!match) {
-      toast.error('Not in the list :(', { icon: '🍂' });
+      toast.error('Nicht in der Liste :(', { icon: '🍂' });
     } else if (match) {
       const alreadyFound = foundWords.find(
         (word) => match.word.toLowerCase() === word.toLowerCase()
       );
       if (alreadyFound) {
-        toast.error('Already found!', { icon: '🦉' });
+        toast.error('Bereits gefunden', { icon: '🦉' });
       } else {
-        toast.success('You found a word!', { icon: '🐸' });
         setIsAnimation(true);
         const panagram = panagrams.find(
           (obj) => obj.word.toLowerCase() === wordInput.toLowerCase()
@@ -83,10 +82,13 @@ export const Game = ({ game }: GameProps) => {
 
         if (wordInput.length === 4) {
           setCurScore((prev) => prev + 1);
+          toast.success('+1', { icon: '🐸' });
         } else if (panagram) {
           setCurScore((prev) => prev + wordInput.length + 7);
+          toast.success(`+${wordInput.length + 7}`, { icon: '🐸' });
         } else {
           setCurScore((prev) => prev + wordInput.length);
+          toast.success(`+${wordInput.length}`, { icon: '🐸' });
         }
 
         setFoundWords((prev) => [...prev, wordInput]);
