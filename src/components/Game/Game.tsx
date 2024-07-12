@@ -1,6 +1,6 @@
 'use client';
 
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import { BiShuffle } from 'react-icons/bi';
 import classNames from 'classnames';
@@ -39,23 +39,21 @@ const levelNames = [
   'Bär',
   'Waldfee',
 ];
+const levelScores = [0, 7, 19, 33, 48, 64, 80, 97, 114, 190];
+
+const levels = levelScores.map((score, i) => ({ level: i + 1, levelName: levelNames[i], score }));
 
 export const Game = ({ game }: GameProps) => {
   const { letters, totalScore, /* levelScores, */ matchedWords, panagrams } = game;
-  const levelScores = [0, 7, 19, 33, 48, 64, 80, 97, 114, 190];
 
   const [gameLetters, setGameLetters] = useState(letters);
   const [wordInput, setWordInput] = useState('');
+
+  // TODO: Derive state from cookie
   const [foundWords, setFoundWords] = useState<string[]>([]);
   const [isAnimation, setIsAnimation] = useState(false);
+  // TODO: Derive score from cookie. Create function that calculates score based on words stored in cookie
   const [curScore, setCurScore] = useState(0);
-  const levels = levelScores.map((score, i) => ({ level: i + 1, levelName: levelNames[i], score }));
-  const [curLevel, setCurLevel] = useState(levels[0]);
-
-  const nextLevel =
-    curLevel.level < 8
-      ? levels[curLevel.level]
-      : { level: 9, levelName: levelNames[-1], score: levelScores[8] };
 
   const submitWord = () => {
     const match = matchedWords.find(
@@ -98,15 +96,6 @@ export const Game = ({ game }: GameProps) => {
     setWordInput('');
   };
 
-  useEffect(() => {
-    for (let i = 0; i < levels.length; i++) {
-      if (curScore >= levels[i].score && curScore < levels[i + 1].score) {
-        setCurLevel(levels[i]);
-        break;
-      }
-    }
-  }, [curScore]);
-
   const shuffleLetters = () => {
     const shuffled = handleShuffle(gameLetters);
     setGameLetters(shuffled);
@@ -118,7 +107,7 @@ export const Game = ({ game }: GameProps) => {
     <>
       <BgLayers isAnimation={isAnimation} setIsAnimation={setIsAnimation} />
       <div className={styles.game}>
-        <Level curScore={curScore} curLevel={curLevel} nextLevel={nextLevel} />
+        <Level curScore={curScore} levels={levels} />
         <input className={styles.currentInput} value={wordInput} readOnly />
         <LetterGrid gameLetters={gameLetters} setWordInput={setWordInput} />
 
