@@ -4,9 +4,8 @@ import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import { BiShuffle } from 'react-icons/bi';
 import classNames from 'classnames';
-import Image from 'next/image';
 import { handleShuffle } from '@/utils/handleShuffle';
-import bgTop from '@/assets/bg_layer_top.webp';
+import { showConfetti } from '@/utils/showConfetti';
 import { Button } from '../Button/Button';
 import { LetterGrid } from '../LetterGrid/LetterGrid';
 import { Level } from '../Level/Level';
@@ -38,9 +37,9 @@ const levelNames = [
   'Waldschrat',
   'Bär',
   'Waldfee',
+  'Queen Bee', // hidden/bonus level (level 10)
 ];
-/* const levelScores = [0, 7, 19, 33, 48, 64, 80, 97, 114, 190]; */
-const levelScores = [0, 7, 15, 23, 31, 42, 50, 60, 71, 100];
+const levelScores = [0, 7, 19, 33, 48, 64, 80, 97, 114, 190];
 
 const levels = levelScores.map((score, i) => ({ level: i + 1, levelName: levelNames[i], score }));
 
@@ -55,6 +54,11 @@ export const Game = ({ game }: GameProps) => {
   const [isAnimation, setIsAnimation] = useState(false);
   // TODO: Derive score from cookie. Create function that calculates score based on words stored in cookie
   const [curScore, setCurScore] = useState(0);
+
+  const triggerAnimation = () => {
+    setIsAnimation(true);
+    showConfetti();
+  };
 
   const submitWord = () => {
     const match = matchedWords.find(
@@ -74,7 +78,7 @@ export const Game = ({ game }: GameProps) => {
       if (alreadyFound) {
         toast.error('Bereits gefunden', { icon: '🦉' });
       } else {
-        setIsAnimation(true);
+        triggerAnimation();
         const panagram = panagrams.find(
           (obj) => obj.word.toLowerCase() === wordInput.toLowerCase()
         );
@@ -136,12 +140,7 @@ type BgLayersProps = {
 const BgLayers = ({ isAnimation, setIsAnimation }: BgLayersProps) => {
   return (
     <>
-      <Image
-        src={bgTop}
-        alt="bgTop"
-        className={classNames(styles.bgTop, isAnimation ? styles.topAnimation : '')}
-        fill
-      />
+      <div className={classNames(styles.bgTop, isAnimation ? styles.topAnimation : '')} />
       <div className={classNames(styles.bgCenter, isAnimation ? styles.centerAnimation : '')} />
       <div
         className={classNames(styles.bgMain, isAnimation ? styles.mainAnimation : '')}
