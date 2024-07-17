@@ -5,13 +5,18 @@
 
 .gridWrapper {
   position: relative;
-  width: 100%;
+  width: calc(100% - 2rem);
+  margin: 0 auto;
+
+  @include mobile {
+    width: 100%;
+  }
 }
 
 .toastBase {
-  min-width: max-content;
+  width: fit-content;
   background: $white;
-  border: 1px solid #333333;
+  border: 1px solid $black;
 }
 
 .gridContainer {
@@ -29,46 +34,67 @@
     align-items: center;
   }
 
+  button {
+    z-index: 2;
+  }
+
   :nth-child(1) {
     grid-area: letterC;
 
     button {
       color: $white;
       background-color: $ocher-90;
-      font-size: 2.8rem;
+    }
+    img {
+      z-index: 1;
+      transform: translateY(-2px);
+
+      @include mobile {
+        transform: translateY(10px);
+      }
     }
   }
 
   :nth-child(2) {
     grid-area: letterT;
+
+    img {
+      transform: translateY(5px);
+    }
   }
 
   :nth-child(3) {
     grid-area: letterLT;
+    img {
+      transform: rotate(-58deg);
+    }
   }
 
   :nth-child(4) {
     grid-area: letterRT;
+    img {
+      transform: rotate(60deg);
+    }
   }
 
   :nth-child(5) {
     grid-area: letterBL;
+    img {
+      transform: rotate(-125deg);
+    }
   }
 
   :nth-child(6) {
     grid-area: letterBR;
+    img {
+      transform: rotate(120deg);
+    }
   }
 
   :nth-child(7) {
     grid-area: letterB;
-  }
-
-  .letter {
-    width: 4.5rem;
-    height: 4.5rem;
-    font-size: 2rem;
-    font-weight: 600;
-    border-radius: 100%;
-    background-color: $white;
+    img {
+      transform: rotate(185deg) translateY(5px);
+    }
   }
 }

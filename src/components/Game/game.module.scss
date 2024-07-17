@@ -5,20 +5,22 @@
 .game {
   position: relative;
   max-width: $maxWidthMainContainer;
-  height: calc(100vh - $heightRunningSection * 2);
-  margin: $heightRunningSection auto 0;
+  min-height: calc(100vh - $heightRunningSection * 2);
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: $gap-l;
-  padding: $gap-m;
+  gap: 4rem;
+  padding: $gap-l;
+  z-index: 4;
 }
 
 .currentInput {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: bold;
   text-align: center;
   padding: 0.25rem;
+  margin-bottom: 1rem;
   color: $white;
   background-color: rgba($color: $white, $alpha: 0.2);
   border: none;
@@ -36,8 +38,8 @@
   margin-top: 1rem;
 }
 
-@mixin posAbsolute {
-  position: absolute;
+@mixin posFixed {
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
@@ -46,48 +48,49 @@
 }
 
 .bgTop {
-  @include posAbsolute();
+  @include posFixed();
+  background: url(../../assets/bg_layer_top.webp) center center/cover no-repeat;
   max-height: 15vw;
   min-height: 15rem;
-  object-fit: cover;
+  z-index: 3;
 }
 .topAnimation {
-  animation: zoomInTop 1.25s ease-in-out;
+  animation: zoomInTop 1s ease-in-out;
 }
 .bgCenter {
-  @include posAbsolute();
+  @include posFixed();
   background: url(../../assets/bg_layer_center.webp) center center/cover no-repeat;
   z-index: -2;
   transform: scale(1);
 }
 .centerAnimation {
-  animation: zoomInCenter 1.25s ease-in-out;
+  animation: zoomInCenter 1s ease-in-out;
 }
 .bgMain {
-  @include posAbsolute();
+  @include posFixed();
   width: 150%;
   left: -25%;
   background: url(../../assets/bg_layer_background.webp) center center/cover no-repeat;
   z-index: -3;
 }
 .mainAnimation {
-  animation: zoomInMain 1.25s ease-in-out;
+  animation: zoomInMain 1s ease-in-out;
 }
 
 @keyframes zoomInTop {
   50% {
-    transform: scale(1.1) translateY(-15%);
+    transform: scale(1.14) translateY(-10%);
   }
 }
 
 @keyframes zoomInCenter {
   50% {
-    transform: scale(1.05);
+    transform: scale(1.07);
   }
 }
 
 @keyframes zoomInMain {
   50% {
-    transform: scale(1.2);
+    transform: scale(0.95);
   }
 }

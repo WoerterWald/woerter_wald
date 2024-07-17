@@ -1,22 +1,47 @@
 @import '@/styles/colors.scss';
+@import '@/styles/mediaQueries.scss';
 
 .flex {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 
-  &.letter {
-    width: 4.5rem;
-    height: 4.5rem;
+  .letter {
+    width: 4rem;
+    height: 4rem;
     font-size: 2rem;
     font-weight: 600;
     border-radius: 100%;
     background-color: $white;
+
+    @include mobile {
+      width: 5rem;
+      height: 5rem;
+    }
   }
 
-  &.primaryBtn {
+  .primaryBtn {
     color: $white;
     background-color: $ocher-90;
-    font-size: 2.8rem;
+    font-size: 2.5rem;
+  }
+
+  .leaf {
+    position: absolute;
+    object-fit: contain;
+    width: 15rem;
+    height: 50vmin;
+    min-height: 10rem;
+    max-height: 13rem;
+    user-select: none;
+
+    @include mobile {
+      max-height: 15rem;
+    }
+
+    @media (orientation: landscape) {
+      height: 50vmax;
+    }
   }
 }
