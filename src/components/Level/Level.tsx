@@ -22,7 +22,7 @@ const findLevel = (levels: LevelObj[], curScore: number) =>
 export const Level = ({ curScore, levels }: LevelProps) => {
   const curLevelIndex = findLevel(levels, curScore) || 0;
   const nextLevelIndex = curLevelIndex + 1;
-  const isLastLevel = curLevelIndex === levels.length - 1;
+  const isLastLevel = nextLevelIndex === levels.length - 1;
 
   return (
     <div className={styles.levelContainer}>

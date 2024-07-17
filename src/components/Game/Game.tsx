@@ -39,7 +39,8 @@ const levelNames = [
   'Bär',
   'Waldfee',
 ];
-const levelScores = [0, 7, 19, 33, 48, 64, 80, 97, 114, 190];
+/* const levelScores = [0, 7, 19, 33, 48, 64, 80, 97, 114, 190]; */
+const levelScores = [0, 7, 15, 23, 31, 42, 50, 60, 71, 100];
 
 const levels = levelScores.map((score, i) => ({ level: i + 1, levelName: levelNames[i], score }));
 
