@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import { handleShuffle } from '@/utils/handleShuffle';
 import { showConfetti } from '@/utils/showConfetti';
 import { Button } from '../Button/Button';
+import { Dropdown } from '../Dropdown/Dropdown';
 import { LetterGrid } from '../LetterGrid/LetterGrid';
 import { Level } from '../Level/Level';
 import styles from './game.module.scss';
@@ -45,7 +46,6 @@ const levels = levelScores.map((score, i) => ({ level: i + 1, levelName: levelNa
 
 export const Game = ({ game }: GameProps) => {
   const { letters, totalScore, /* levelScores, */ matchedWords, panagrams } = game;
-
   const [gameLetters, setGameLetters] = useState(letters);
   const [wordInput, setWordInput] = useState('');
 
@@ -94,7 +94,7 @@ export const Game = ({ game }: GameProps) => {
           toast.success(`+${wordInput.length}`, { icon: '🐸' });
         }
 
-        setFoundWords((prev) => [...prev, wordInput]);
+        setFoundWords((prev) => [...prev, match.word]);
       }
     }
 
@@ -113,6 +113,7 @@ export const Game = ({ game }: GameProps) => {
       <BgLayers isAnimation={isAnimation} setIsAnimation={setIsAnimation} />
       <div className={styles.game}>
         <Level curScore={curScore} levels={levels} />
+        <Dropdown foundWords={foundWords} />
         <input className={styles.currentInput} value={wordInput} readOnly />
         <LetterGrid gameLetters={gameLetters} setWordInput={setWordInput} />
 
