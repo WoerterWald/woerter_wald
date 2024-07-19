@@ -25,7 +25,7 @@ export const Dropdown = ({ foundWords }: DropdownProps) => {
   return (
     <div className={styles.dropdown}>
       <button
-        className={classNames(styles.dropdownBtn, open && styles.radiusNull)}
+        className={classNames(styles.dropdownBtn, open && styles.active)}
         onClick={handleClick}
       >
         {!open ? (
