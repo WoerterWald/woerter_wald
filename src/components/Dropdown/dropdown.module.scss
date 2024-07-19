@@ -1,0 +1,60 @@
+@import '@/styles/mediaQueries.scss';
+@import '@/styles/variables.scss';
+@import '@/styles/colors.scss';
+
+.dropdown {
+  position: relative;
+  /* display: inline-block; */
+
+  .dropdownBtn {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: $white;
+    border: 1.5px solid $black;
+    border-radius: $brad-sm;
+    padding: 0.5rem;
+    padding-top: 0.75rem;
+
+    .arrowBtn {
+      width: 1.3rem;
+      height: 1.3rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .radiusNull {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .dropdownContent {
+    position: absolute;
+    width: 100%;
+    height: 40rem;
+    overflow: scroll;
+    background-color: $white;
+    color: $black;
+    font-size: 0.85rem;
+    border: 1.5px solid $black;
+    border-top: 0;
+    border-bottom-left-radius: $brad-sm;
+    border-bottom-right-radius: $brad-sm;
+    padding: 0.5rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+@include tablet {
+  .dropdown {
+    .dropdownContent {
+      height: 45rem;
+    }
+  }
+}
