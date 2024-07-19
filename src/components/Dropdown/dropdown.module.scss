@@ -5,7 +5,6 @@
 .dropdown {
   position: relative;
   z-index: 4;
-  /* display: inline-block; */
 
   .dropdownBtn {
     display: flex;
@@ -44,7 +43,7 @@
     padding: 0.5rem;
     cursor: pointer;
 
-    @include tablet {
+    @include mobile {
       height: 45rem;
     }
   }
