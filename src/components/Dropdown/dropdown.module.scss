@@ -32,8 +32,7 @@
   .dropdownContent {
     position: absolute;
     width: 100%;
-    min-height: 39rem;
-    max-height: 40rem;
+    height: 40rem;
     overflow: scroll;
     background-color: $white;
     color: $black;
@@ -46,8 +45,7 @@
     cursor: pointer;
 
     @include tablet {
-      min-height: 44rem;
-      max-height: 45rem;
+      height: 44rem;
     }
   }
 }
