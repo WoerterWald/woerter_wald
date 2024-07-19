@@ -35,9 +35,9 @@
     height: 2rem;
     top: 1rem;
     right: 1rem;
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
       color: $white-75;
     }
   }
@@ -53,10 +53,7 @@
     li {
       padding-left: 2rem;
       width: 100%;
-
-      &:hover {
-        cursor: pointer;
-      }
+      cursor: pointer;
     }
   }
 }

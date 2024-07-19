@@ -4,29 +4,27 @@
 
 .dropdown {
   position: relative;
+  z-index: 4;
   /* display: inline-block; */
 
   .dropdownBtn {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     background-color: $white;
-    border: 1.5px solid $black;
+    border: 1px solid $black;
     border-radius: $brad-sm;
     padding: 0.5rem;
-    padding-top: 0.75rem;
 
     .arrowBtn {
       width: 1.3rem;
       height: 1.3rem;
-
-      &:hover {
-        cursor: pointer;
-      }
+      cursor: pointer;
     }
   }
 
-  .radiusNull {
+  .active {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
@@ -34,27 +32,22 @@
   .dropdownContent {
     position: absolute;
     width: 100%;
-    height: 40rem;
+    min-height: 39rem;
+    max-height: 40rem;
     overflow: scroll;
     background-color: $white;
     color: $black;
-    font-size: 0.85rem;
-    border: 1.5px solid $black;
+    font-size: 0.875rem;
+    border: 1px solid $black;
     border-top: 0;
     border-bottom-left-radius: $brad-sm;
     border-bottom-right-radius: $brad-sm;
     padding: 0.5rem;
+    cursor: pointer;
 
-    &:hover {
-      cursor: pointer;
-    }
-  }
-}
-
-@include tablet {
-  .dropdown {
-    .dropdownContent {
-      height: 45rem;
+    @include tablet {
+      min-height: 44rem;
+      max-height: 45rem;
     }
   }
 }
