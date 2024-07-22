@@ -33,7 +33,25 @@ const calcLevels = (words: WordT[], panagrams: WordT[]) => {
   }
   const totalScore = levelScores[levelScores.length - 1];
 
-  return { totalScore, levelScores };
+  const levelNames = [
+    'Ameise',
+    'Regenwurm',
+    'Laubfrosch',
+    'Salamander',
+    'Hase',
+    'Fuchs',
+    'Waldschrat',
+    'Bär',
+    'Waldfee',
+  ];
+
+  const levels = levelScores.map((levelScore, i) => ({
+    level: i + 1,
+    levelName: levelNames[i],
+    nextLevelScore: levelScore,
+  }));
+
+  return { totalScore, levels };
 };
 
 const createGame = async (iteration = 0): Promise<void> => {
@@ -63,12 +81,12 @@ const createGame = async (iteration = 0): Promise<void> => {
       return createGame(nextIteration);
     } else {
       console.log(words[0], panagrams[0]);
-      const { totalScore, levelScores } = calcLevels(words, panagrams);
+      const { totalScore, levels } = calcLevels(words, panagrams);
 
       await Game.create({
         letters,
         totalScore,
-        levelScores,
+        levels,
         matchedWords: words,
         panagrams: panagrams,
       });
