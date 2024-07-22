@@ -1,5 +1,3 @@
-import { assert } from 'console';
-import next from 'next';
 import Image from 'next/image';
 import mushroom from '@/assets/Mushroom.webp';
 import { LevelT } from '../Game/Game';
