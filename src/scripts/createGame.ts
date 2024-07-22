@@ -22,16 +22,6 @@ const calcLevels = (words: WordT[], panagrams: WordT[]) => {
   const score = Math.ceil(
     (totalWordScore + panagramScore) / ((words.length + panagrams.length) * 0.5)
   );
-  const levelScores: number[] = [];
-  const numberOfLevels = 9;
-  const difficultyFactor = 1.75;
-  let levelAcc = 0;
-  for (let i = 1; i <= numberOfLevels; i++) {
-    const nextLevel = Math.round(score * (1 - Math.exp(-i / difficultyFactor)));
-    levelAcc += nextLevel;
-    levelScores.push(levelAcc);
-  }
-  const totalScore = levelScores[levelScores.length - 1];
 
   const levelNames = [
     'Ameise',
@@ -43,7 +33,17 @@ const calcLevels = (words: WordT[], panagrams: WordT[]) => {
     'Waldschrat',
     'Bär',
     'Waldfee',
+    'Kodama',
   ];
+  const levelScores: number[] = [];
+  const difficultyFactor = 1.75;
+  let levelAcc = 0;
+  for (let i = 1; i <= levelNames.length; i++) {
+    const nextLevel = Math.round(score * (1 - Math.exp(-i / difficultyFactor)));
+    levelAcc += nextLevel;
+    levelScores.push(levelAcc);
+  }
+  const totalScore = levelScores[levelScores.length - 1];
 
   const levels = levelScores.map((levelScore, i) => ({
     level: i + 1,

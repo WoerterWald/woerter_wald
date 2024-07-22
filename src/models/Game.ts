@@ -41,7 +41,7 @@ function validateLetters(letters: string[]) {
 }
 
 function validateLevelScores(levelScores: number[]) {
-  return levelScores.length === 9;
+  return levelScores.length === 10;
 }
 
 gameSchema.virtual('mainLetter').get(function () {
