@@ -35,7 +35,7 @@ type GameProps = {
 };
 
 export const Game = ({ game }: GameProps) => {
-  const { letters, totalScore, levels, matchedWords, panagrams } = game;
+  const { letters, levels, matchedWords, panagrams } = game;
   const [gameLetters, setGameLetters] = useState(letters);
   const [wordInput, setWordInput] = useState('');
 
@@ -102,7 +102,7 @@ export const Game = ({ game }: GameProps) => {
     <>
       <BgLayers isAnimation={isAnimation} setIsAnimation={setIsAnimation} />
       <div className={styles.game}>
-        <Level curScore={curScore} levels={levels} totalScore={totalScore} />
+        <Level curScore={curScore} levels={levels} />
         <Dropdown foundWords={foundWords} />
         <input className={styles.currentInput} value={wordInput} readOnly />
         <LetterGrid gameLetters={gameLetters} setWordInput={setWordInput} />

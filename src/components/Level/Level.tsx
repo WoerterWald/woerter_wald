@@ -1,5 +1,3 @@
-import { assert } from 'console';
-import next from 'next';
 import Image from 'next/image';
 import mushroom from '@/assets/Mushroom.webp';
 import { LevelT } from '../Game/Game';
@@ -8,14 +6,13 @@ import styles from './level.module.scss';
 type LevelProps = {
   curScore: number;
   levels: LevelT[];
-  totalScore: number;
 };
 
-const hiddenLevel = {
-  level: 10,
+const createHiddenLevel = (arrLength: number) => ({
+  level: arrLength + 1,
   levelName: 'Kodama',
   nextLevelScore: null,
-};
+});
 
 /* Got this from Martin, it's called assertion functions. Usually used to assert that a value is of a certain type, see assertIsNotNull function.
 Martin used it like assertNextLevel, where we can rule out that nextLevel is null, but is certainly a number, by doing this check in an extra function, but also return the value.
@@ -42,18 +39,18 @@ const findLevel = (levels: LevelT[], curScore: number) =>
     // return curScore < level.nextLevelScore;
   });
 
-export const Level = ({ curScore, levels, totalScore }: LevelProps) => {
-  const curLevelIndex = findLevel([...levels, hiddenLevel], curScore) || 0;
-  const nextLevelIndex = curLevelIndex + 1;
+export const Level = ({ curScore, levels }: LevelProps) => {
+  const allLevels = [...levels, createHiddenLevel(levels.length)];
+  const curLevelIndex = findLevel(allLevels, curScore) || 0;
+  const curLevel = allLevels[curLevelIndex];
   const isLastLevel = curLevelIndex >= levels.length - 1;
+
   //TODO: Indicate that the last level is reached. Maybe prevent user from continuing playing and show a kodama
-  const isHiddenLevel = curScore >= totalScore;
-
-  const levelName = isHiddenLevel ? hiddenLevel.levelName : levels[curLevelIndex].levelName;
-
   return (
     <div className={styles.levelContainer}>
-      <p>Level: {levelName}</p>
+      <p>
+        Level {curLevel.level}: {curLevel.levelName}
+      </p>
 
       {isLastLevel ? (
         <p>
@@ -61,9 +58,9 @@ export const Level = ({ curScore, levels, totalScore }: LevelProps) => {
         </p>
       ) : (
         <p>
-          {assertNextLevel(levels[curLevelIndex].nextLevelScore) - curScore}
+          {assertNextLevel(curLevel.nextLevelScore) - curScore}
           <Image src={mushroom} alt="Pilz" width={20} height={20} />
-          bis Level {levels[nextLevelIndex].level}
+          bis Level {levels[curLevelIndex + 1].level}
         </p>
       )}
     </div>
