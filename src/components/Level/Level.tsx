@@ -1,5 +1,3 @@
-import { assert } from 'console';
-import next from 'next';
 import Image from 'next/image';
 import { assertNextLevel, findLevels } from '@/utils/findLevelHelper';
 import mushroom from '@/assets/mushroom.webp';
