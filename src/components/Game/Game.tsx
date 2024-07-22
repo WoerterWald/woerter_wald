@@ -102,7 +102,7 @@ export const Game = ({ game }: GameProps) => {
     <>
       <BgLayers isAnimation={isAnimation} setIsAnimation={setIsAnimation} />
       <div className={styles.game}>
-        <Level curScore={curScore} levels={levels} totalScore={totalScore} />
+        <Level curScore={curScore} levels={levels} />
         <Dropdown foundWords={foundWords} />
         <input className={styles.currentInput} value={wordInput} readOnly />
         <LetterGrid gameLetters={gameLetters} setWordInput={setWordInput} />
