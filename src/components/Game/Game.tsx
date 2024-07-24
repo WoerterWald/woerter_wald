@@ -1,6 +1,6 @@
 'use client';
 
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import toast from 'react-hot-toast';
 import { BiShuffle } from 'react-icons/bi';
 import classNames from 'classnames';
@@ -16,9 +16,15 @@ type Word = {
   word: string;
 };
 
+export type LevelT = {
+  level: number;
+  levelName: string;
+  nextLevelScore: number | null;
+};
+
 type Game = {
   letters: string[];
-  levelScores: number[];
+  levels: LevelT[];
   totalScore: number;
   matchedWords: Word[];
   panagrams: Word[];
@@ -28,24 +34,8 @@ type GameProps = {
   game: Game;
 };
 
-const levelNames = [
-  'Ameise',
-  'Regenwurm',
-  'Laubfrosch',
-  'Salamander',
-  'Hase',
-  'Fuchs',
-  'Waldschrat',
-  'Bär',
-  'Waldfee',
-  'Queen Bee', // hidden/bonus level (level 10)
-];
-const levelScores = [0, 7, 19, 33, 48, 64, 80, 97, 114, 190];
-
-const levels = levelScores.map((score, i) => ({ level: i + 1, levelName: levelNames[i], score }));
-
 export const Game = ({ game }: GameProps) => {
-  const { letters, totalScore, /* levelScores, */ matchedWords, panagrams } = game;
+  const { letters, levels, matchedWords, panagrams } = game;
   const [gameLetters, setGameLetters] = useState(letters);
   const [wordInput, setWordInput] = useState('');
 
