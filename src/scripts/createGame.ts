@@ -1,9 +1,9 @@
 import dbConnect from '../lib/dbConnect';
 import Game from '../models/Game';
-import Word, { WordT } from '../models/Word';
+import Word, { WordSchema } from '../models/Word';
 import { generateLetters } from '../utils/generateLetters';
 
-const calcLevels = (words: WordT[], panagrams: WordT[]) => {
+const calcLevels = (words: WordSchema[], panagrams: WordSchema[]) => {
   let shortWordScore = 0;
   let longWordScore = 0;
 

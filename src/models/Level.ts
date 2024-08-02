@@ -1,12 +1,12 @@
 import { Document, Schema } from 'mongoose';
 
-export interface LevelT extends Document {
+export interface LevelSchema extends Document {
   level: number;
   levelName: string;
   nextLevelScore: number;
 }
 
-export const levelSchema = new Schema<LevelT>(
+export const levelSchema = new Schema<LevelSchema>(
   {
     level: {
       type: Number,
