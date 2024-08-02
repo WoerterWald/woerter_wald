@@ -1,17 +1,16 @@
-import { GameT } from "@/models/Game";
-import { WordT } from "@/models/Word";
-import { Document, ObjectId, PopulatedDoc } from "mongoose";
+import { Document, ObjectId, PopulatedDoc } from 'mongoose';
+import { GameSchema } from '@/models/Game';
+import { WordSchema } from '@/models/Word';
 
-interface PopulatedGame extends GameT {
-  panagrams: PopulatedDoc<Document<ObjectId> & WordT>[],
-  matchedWords: PopulatedDoc<Document<ObjectId> & WordT>[]
+interface PopulatedGame extends GameSchema {
+  panagrams: PopulatedDoc<Document<ObjectId> & WordSchema>[];
+  matchedWords: PopulatedDoc<Document<ObjectId> & WordSchema>[];
 }
 
 export const checkWord = (game: PopulatedGame, word: string) => {
-  const matchedPanagram = game.panagrams.find((match: WordT) => match.word === word);
+  const matchedPanagram = game.panagrams.find((match: WordSchema) => match.word === word);
   if (matchedPanagram) return 'Panagram found';
-  const match = game.matchedWords.find((match: WordT) => match.word === word);
+  const match = game.matchedWords.find((match: WordSchema) => match.word === word);
   if (match) return 'Match found';
   return 'No match found';
-
-}
+};
