@@ -22,7 +22,7 @@ export const Modal = ({ isSmall = false, children }: ModalProps) => {
     setModalType('');
   };
 
-  useOutsideClick(ref, handleCloseModal);
+  // useOutsideClick(ref, handleCloseModal);
 
   return (
     <div className={styles.modalWrapper}>
