@@ -54,6 +54,12 @@
       padding-left: 2rem;
       width: 100%;
       cursor: pointer;
+
+      button {
+        color: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+      }
     }
   }
 }

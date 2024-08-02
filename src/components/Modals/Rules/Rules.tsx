@@ -1,8 +1,8 @@
 import { GiThreeLeaves as LeaveIcon } from 'react-icons/gi';
-import { Modal } from '@/components/Modal/Modal';
+import { Modal } from '@/components/ModalWrapper/ModalWrapper';
 import styles from './rules.module.scss';
 
-export default function Rules() {
+export const Rules = () => {
   return (
     <Modal>
       <div className={styles.rulesWrapper}>
@@ -35,4 +35,4 @@ export default function Rules() {
       </div>
     </Modal>
   );
-}
+};

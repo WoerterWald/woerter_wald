@@ -1,16 +1,16 @@
 import { Document, Schema, Types, model, models } from 'mongoose';
-import { LevelT, levelSchema } from './Level';
+import { LevelSchema, levelSchema } from './Level';
 import { wordSchema } from './Word';
 
-export interface GameT extends Document {
+export interface GameSchema extends Document {
   letters: string[];
   totalScore: number;
-  levels: Types.DocumentArray<LevelT>;
+  levels: Types.DocumentArray<LevelSchema>;
   matchedWords: Types.ObjectId[];
   panagrams: Types.ObjectId[];
 }
 
-const gameSchema = new Schema<GameT>(
+const gameSchema = new Schema<GameSchema>(
   {
     letters: {
       type: [String],
@@ -49,4 +49,4 @@ gameSchema.virtual('mainLetter').get(function () {
   return this.letters[0];
 });
 
-export default models.Game || model<GameT>('Game', gameSchema);
+export default models.Game || model<GameSchema>('Game', gameSchema);

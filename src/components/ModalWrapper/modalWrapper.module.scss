@@ -1,6 +1,6 @@
-@import '../../styles/mediaQueries.scss';
-@import '../../styles/variables.scss';
-@import '../../styles/colors.scss';
+@import '@/styles/mediaQueries.scss';
+@import '@/styles/variables.scss';
+@import '@/styles/colors.scss';
 
 .modalWrapper {
   position: absolute;
@@ -49,6 +49,10 @@
   @include tablet {
     width: calc(100% - 6rem);
   }
+}
+
+.small {
+  max-width: 25rem;
 }
 
 .modalContent {

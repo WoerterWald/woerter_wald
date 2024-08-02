@@ -4,15 +4,18 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import toast from 'react-hot-toast';
 import { BiShuffle } from 'react-icons/bi';
 import classNames from 'classnames';
+import { calcScore } from '@/utils/calcScore';
 import { handleShuffle } from '@/utils/handleShuffle';
 import { showConfetti } from '@/utils/showConfetti';
+import { useFindWords } from '@/hooks/useFindWords';
 import { Button } from '../Button/Button';
 import { Dropdown } from '../Dropdown/Dropdown';
 import { LetterGrid } from '../LetterGrid/LetterGrid';
 import { Level } from '../Level/Level';
+import { Modals } from '../Modals/Modals';
 import styles from './game.module.scss';
 
-type Word = {
+export type Word = {
   word: string;
 };
 
@@ -22,7 +25,8 @@ export type LevelT = {
   nextLevelScore: number | null;
 };
 
-type Game = {
+export type Game = {
+  id: string;
   letters: string[];
   levels: LevelT[];
   totalScore: number;
@@ -38,12 +42,9 @@ export const Game = ({ game }: GameProps) => {
   const { letters, levels, matchedWords, panagrams } = game;
   const [gameLetters, setGameLetters] = useState(letters);
   const [wordInput, setWordInput] = useState('');
-
-  // TODO: Derive state from cookie
-  const [foundWords, setFoundWords] = useState<string[]>([]);
   const [isAnimation, setIsAnimation] = useState(false);
-  // TODO: Derive score from cookie. Create function that calculates score based on words stored in cookie
-  const [curScore, setCurScore] = useState(0);
+
+  const { foundWords, setFoundWords, curScore } = useFindWords(game.id, panagrams);
 
   const triggerAnimation = () => {
     setIsAnimation(true);
@@ -62,28 +63,15 @@ export const Game = ({ game }: GameProps) => {
     } else if (!match) {
       toast.error('Nicht in der Liste :(', { icon: '🍂' });
     } else if (match) {
-      const alreadyFound = foundWords.find(
+      const isAlreadyFound = foundWords.some(
         (word) => match.word.toLowerCase() === word.toLowerCase()
       );
-      if (alreadyFound) {
+      if (isAlreadyFound) {
         toast.error('Bereits gefunden', { icon: '🦉' });
       } else {
         triggerAnimation();
-        const panagram = panagrams.find(
-          (obj) => obj.word.toLowerCase() === wordInput.toLowerCase()
-        );
-
-        if (wordInput.length === 4) {
-          setCurScore((prev) => prev + 1);
-          toast.success('+1', { icon: '🐸' });
-        } else if (panagram) {
-          setCurScore((prev) => prev + wordInput.length + 7);
-          toast.success(`+${wordInput.length + 7}`, { icon: '🐸' });
-        } else {
-          setCurScore((prev) => prev + wordInput.length);
-          toast.success(`+${wordInput.length}`, { icon: '🐸' });
-        }
-
+        const scoreToAdd = calcScore(wordInput, panagrams);
+        toast.success(`${scoreToAdd}`, { icon: '🐸' });
         setFoundWords((prev) => [...prev, match.word]);
       }
     }
@@ -119,6 +107,7 @@ export const Game = ({ game }: GameProps) => {
           </Button>
         </div>
       </div>
+      <Modals game={game} panagrams={panagrams} />
     </>
   );
 };

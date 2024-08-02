@@ -3,16 +3,20 @@
 import { useRef, useState } from 'react';
 import { FaBars } from 'react-icons/fa6';
 import { IoClose } from 'react-icons/io5';
-import Link from 'next/link';
+import { useAtom } from 'jotai';
+import { modalAtom } from '@/atoms/atoms';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 import styles from './hamburger.module.scss';
 
 export const Hamburger = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [, setModalType] = useAtom(modalAtom);
+  const [showNavigation, setShowNavigation] = useState(false);
   const modalRef = useRef(null);
 
-  const open = () => setShowModal(true);
-  const close = () => setShowModal(false);
+  const open = () => setShowNavigation(true);
+  const close = () => {
+    setShowNavigation(false);
+  };
 
   useOutsideClick(modalRef, close);
 
@@ -20,14 +24,19 @@ export const Hamburger = () => {
     <div ref={modalRef} className={styles.burgerWrapper}>
       <FaBars onClick={open} className={styles.burgerIcon} />
 
-      {showModal && (
+      {showNavigation && (
         <div className={styles.modal}>
           <IoClose className={styles.closeBtn} onClick={close} />
           <ul>
             <li>
-              <Link href="/rules" onClick={close}>
+              <button
+                onClick={() => {
+                  close();
+                  setModalType('rules');
+                }}
+              >
                 Regeln
-              </Link>
+              </button>
             </li>
             <li>Ergebnis teilen</li>
           </ul>
