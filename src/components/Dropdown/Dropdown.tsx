@@ -41,7 +41,7 @@ export const Dropdown = ({ foundWords, panagrams }: DropdownProps) => {
       {open && (
         <div className={styles.dropdownContent} onClick={handleClick}>
           {foundWords
-            .sort((a, b) => a.slice(0).toLowerCase().localeCompare(b.slice(0).toLowerCase()))
+            .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
             .map((word) => {
               const panagram = panagrams.find((elem) => elem.word === word);
 
