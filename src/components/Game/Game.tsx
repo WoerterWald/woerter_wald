@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import { BiShuffle } from 'react-icons/bi';
 import classNames from 'classnames';
 import { handleShuffle } from '@/utils/handleShuffle';
-import { showConfetti } from '@/utils/showConfetti';
+import { useShowConfetti } from '@/hooks/useShowConfetti';
 import { Button } from '../Button/Button';
 import { Dropdown } from '../Dropdown/Dropdown';
 import { LetterGrid } from '../LetterGrid/LetterGrid';
@@ -38,6 +38,7 @@ export const Game = ({ game }: GameProps) => {
   const { letters, levels, matchedWords, panagrams } = game;
   const [gameLetters, setGameLetters] = useState(letters);
   const [wordInput, setWordInput] = useState('');
+  const showConfetti = useShowConfetti();
 
   // TODO: Derive state from cookie
   const [foundWords, setFoundWords] = useState<string[]>([]);
