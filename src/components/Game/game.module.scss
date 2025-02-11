@@ -5,14 +5,21 @@
 .game {
   position: relative;
   max-width: $maxWidthMainContainer;
-  min-height: calc(100vh - $heightRunningSection * 2);
+  min-height: calc(100dvh - $heightRunningSection * 2);
   margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 4rem;
+  gap: 2rem;
   padding: $gap-l;
   z-index: 4;
+
+  @include tablet {
+    gap: 3rem;
+  }
+  @include desktop {
+    gap: 4rem;
+  }
 }
 
 .currentInput {
@@ -26,6 +33,7 @@
   border: none;
   border-radius: $brad-sm;
   cursor: default;
+  z-index: 5;
 
   &:focus {
     outline: none;
