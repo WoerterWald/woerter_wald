@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { BiSolidDownArrow } from 'react-icons/bi';
 import { BiSolidUpArrow } from 'react-icons/bi';
 import classNames from 'classnames';
@@ -12,10 +12,24 @@ type DropdownProps = {
   panagrams: Word[];
 };
 
+const getRecentGuesses = (foundWords: string[], pangrams: Word[]) => {
+  return foundWords
+    .toReversed()
+    .map((word) => {
+      const isPangram = pangrams.some((pangram) => pangram.word === word);
+      return (
+        <Fragment key={word}>
+          {isPangram ? <span className={styles.panagram}>{word}</span> : word}
+          {', '}
+        </Fragment>
+      );
+    })
+    .concat(<span>...</span>);
+};
 export const Dropdown = ({ foundWords, panagrams }: DropdownProps) => {
   const [open, setOpen] = useState(false);
 
-  const recentGuesses = foundWords.slice(0).reverse().join(' ').slice(0, 41).concat('...');
+  const recentGuesses = getRecentGuesses(foundWords, panagrams);
 
   const handleClick = () => setOpen(!open);
 
@@ -32,7 +46,7 @@ export const Dropdown = ({ foundWords, panagrams }: DropdownProps) => {
           </>
         ) : (
           <>
-            <span>{`Du hast ${foundWords.length} Wörter gefunden`}</span>
+            <span>{`Du hast ${foundWords.length} ${foundWords.length === 1 ? 'Wort' : 'Wörter'} gefunden`}</span>
             <BiSolidUpArrow className={styles.arrowBtn} />
           </>
         )}

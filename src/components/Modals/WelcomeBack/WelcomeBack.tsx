@@ -12,7 +12,7 @@ type WelcomeBack = {
 };
 
 export const WelcomeBack = ({ game, panagrams }: WelcomeBack) => {
-  const { foundWords, curScore } = useFindWords(game.id, panagrams);
+  const { foundWords, curScore } = useFindWords(game._id, panagrams);
   const { curLevel } = findLevels(game.levels, curScore);
 
   return (
@@ -20,7 +20,8 @@ export const WelcomeBack = ({ game, panagrams }: WelcomeBack) => {
       <div className={styles.container}>
         <h2>Willkommen zurück!</h2>
         <p className={styles.summary}>
-          Du hast bereits {foundWords.length} Wörter gefunden und {curScore}{' '}
+          Du hast bereits {foundWords.length} {foundWords.length === 1 ? 'Wort' : 'Wörter'} gefunden
+          und {curScore}{' '}
           <Image
             src={mushroomIcon}
             className={styles.mushrrom}
