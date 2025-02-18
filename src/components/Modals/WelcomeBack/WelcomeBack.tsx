@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { findLevels } from '@/utils/findLevelHelper';
 import { useFindWords } from '@/hooks/useFindWords';
-import mushroomIcon from '@/assets/mushroom.webp';
 import { Game, Word } from '@/components/Game/Game';
 import { Modal } from '@/components/ModalWrapper/ModalWrapper';
 import styles from './welcomeBack.module.scss';
@@ -49,7 +48,7 @@ export const WelcomeBack = ({ game, panagrams }: WelcomeBack) => {
           Du hast bereits {foundWords.length} {foundWords.length === 1 ? 'Wort' : 'Wörter'} gefunden
           und {curScore}{' '}
           <Image
-            src={mushroomIcon}
+            src="/assets/mushroom.webp"
             className={styles.mushrrom}
             alt={'Pilz'}
             width={18}

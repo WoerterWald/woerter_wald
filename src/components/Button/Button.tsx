@@ -6,13 +6,15 @@ type ButtonProps = {
   size: 'small' | 'large';
   onClick: () => void;
   children: ReactNode;
+  ariaLabel?: string;
 };
 
-export const Button = ({ size, onClick, children }: ButtonProps) => {
+export const Button = ({ size, onClick, children, ariaLabel }: ButtonProps) => {
   return (
     <button
       className={classNames(styles.btn, size === 'large' ? styles.btnLarge : styles.btnSmall)}
       onClick={onClick}
+      aria-label={ariaLabel ? ariaLabel : ''}
     >
       {children}
     </button>
