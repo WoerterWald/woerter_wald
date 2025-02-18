@@ -2,9 +2,9 @@ import { Document, ObjectId, PopulatedDoc } from 'mongoose';
 import { GameSchema } from '@/models/Game';
 import { WordSchema } from '@/models/Word';
 
-interface PopulatedGame extends GameSchema {
-  panagrams: PopulatedDoc<Document<ObjectId> & WordSchema>[];
-  matchedWords: PopulatedDoc<Document<ObjectId> & WordSchema>[];
+interface PopulatedGame extends Omit<GameSchema, 'matchedWords' | 'panagrams'> {
+  panagrams: WordSchema[];
+  matchedWords: WordSchema[];
 }
 
 export const checkWord = (game: PopulatedGame, word: string) => {

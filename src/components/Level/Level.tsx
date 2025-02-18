@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { assertNextLevel, findLevels } from '@/utils/findLevelHelper';
-import mushroom from '@/assets/mushroom.webp';
 import { LevelT } from '../Game/Game';
 import styles from './level.module.scss';
 
@@ -21,12 +20,12 @@ export const Level = ({ curScore, levels }: LevelProps) => {
 
       {isLastLevel ? (
         <p>
-          Score: {curScore} <Image src={mushroom} alt="Pilz" width={20} height={20} />
+          Score: {curScore} <Image src="/assets/mushroom.webp" alt="Pilz" width={20} height={20} />
         </p>
       ) : (
         <p>
           {assertNextLevel(curLevel.nextLevelScore) - curScore}
-          <Image src={mushroom} alt="Pilz" width={20} height={20} />
+          <Image src="/assets/mushroom.webp" alt="Pilz" width={48} height={36} />
           bis Level {nextLevel.level}
         </p>
       )}

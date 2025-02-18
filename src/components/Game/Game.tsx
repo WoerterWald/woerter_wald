@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { BiShuffle } from 'react-icons/bi';
 import classNames from 'classnames';
+import Image from 'next/image';
 import { calcScore } from '@/utils/calcScore';
 import { handleShuffle } from '@/utils/handleShuffle';
 import { useFindWords } from '@/hooks/useFindWords';
@@ -89,19 +90,24 @@ export const Game = ({ game }: GameProps) => {
   const resetWordInput = () => setWordInput(wordInput.slice(0, -1));
 
   return (
-    <>
+    <main>
       <BgLayers isAnimation={isAnimation} setIsAnimation={setIsAnimation} />
       <div className={styles.game}>
         <Level curScore={curScore} levels={levels} />
         <Dropdown foundWords={foundWords} panagrams={panagrams} />
-        <input className={styles.currentInput} value={wordInput} readOnly />
+        <input
+          className={styles.currentInput}
+          value={wordInput}
+          readOnly
+          aria-label="Aktuelle Eingabe"
+        />
         <LetterGrid gameLetters={gameLetters} setWordInput={setWordInput} />
 
         <div className={styles.btnsContainer}>
           <Button size="large" onClick={submitWord}>
             Eingabe
           </Button>
-          <Button size="small" onClick={shuffleLetters}>
+          <Button size="small" onClick={shuffleLetters} ariaLabel="Buchstaben neu mischen">
             <BiShuffle />
           </Button>
           <Button size="large" onClick={resetWordInput}>
@@ -110,7 +116,7 @@ export const Game = ({ game }: GameProps) => {
         </div>
       </div>
       <Modals game={game} panagrams={panagrams} />
-    </>
+    </main>
   );
 };
 
@@ -122,9 +128,25 @@ type BgLayersProps = {
 const BgLayers = ({ isAnimation, setIsAnimation }: BgLayersProps) => {
   return (
     <>
-      <div className={classNames(styles.bgTop, isAnimation ? styles.topAnimation : '')} />
-      <div className={classNames(styles.bgCenter, isAnimation ? styles.centerAnimation : '')} />
-      <div
+      <Image
+        src="/assets/bg_layer_top.webp"
+        alt="Baumkronen am oberen Bildschirmrand"
+        fill
+        priority
+        placeholder="blur"
+        blurDataURL="/assets/bg_layer_top_lowres.webp"
+        className={classNames(styles.bgTop, isAnimation ? styles.topAnimation : '')}
+      />
+      <Image
+        src="/assets/bg_layer_center.webp"
+        alt="Wald Vordergrund"
+        fill
+        className={classNames(styles.bgCenter, isAnimation ? styles.centerAnimation : '')}
+      />
+      <Image
+        src="/assets/bg_layer_background.webp"
+        alt="Wald Hintergrund"
+        fill
         className={classNames(styles.bgMain, isAnimation ? styles.mainAnimation : '')}
         onAnimationEnd={() => setIsAnimation(false)}
       />

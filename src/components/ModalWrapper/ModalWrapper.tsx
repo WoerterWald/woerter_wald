@@ -6,7 +6,6 @@ import { IoClose } from 'react-icons/io5';
 import classNames from 'classnames';
 import { useAtom } from 'jotai';
 import { modalAtom } from '@/atoms/atoms';
-import { useOutsideClick } from '../../hooks/useOutsideClick';
 import styles from './modalWrapper.module.scss';
 
 type ModalProps = {
