@@ -47,13 +47,15 @@
       margin-right: $gap-xs;
       display: inline-block;
     }
-    .panagram {
-      background-color: #ffb82bdb;
-      padding: 0 2px;
-    }
 
     @include mobile {
       height: 45rem;
     }
+  }
+
+  .panagram {
+    background-color: #ffb82bdb;
+    padding: 2px 3px;
+    border-radius: 2px;
   }
 }

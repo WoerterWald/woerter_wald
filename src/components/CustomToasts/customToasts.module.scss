@@ -1,0 +1,19 @@
+@import '@/styles/variables.scss';
+@import '@/styles/colors.scss';
+
+.successToast {
+  background-color: $ocher !important;
+  padding: 0.25rem 0.5rem !important;
+}
+
+.errorToast {
+  background-color: $tomato !important;
+  color: $white !important;
+  padding: 0.25rem 0.5rem !important;
+}
+
+.toastContent {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

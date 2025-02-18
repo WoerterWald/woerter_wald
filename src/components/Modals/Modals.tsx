@@ -17,10 +17,10 @@ export const Modals = ({ game, panagrams }: Modals) => {
   const [modalType, setModalType] = useAtom(modalAtom);
 
   useEffect(() => {
-    if (getCookie(game.id)) {
+    if (getCookie(game._id)) {
       setModalType('welcomeBack');
     }
-  }, [game.id, setModalType]);
+  }, [game._id, setModalType]);
 
   switch (modalType) {
     case 'rules':

@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { Inspiration, Inter } from 'next/font/google';
+import '../styles/reset.scss';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const inspiration = Inspiration({
@@ -20,7 +21,7 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${inspiration.variable}`}>
+    <html lang="de" className={`${inter.variable} ${inspiration.variable}`}>
       <body>{children}</body>
     </html>
   );

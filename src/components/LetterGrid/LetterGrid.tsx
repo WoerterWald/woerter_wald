@@ -1,6 +1,6 @@
 'use client';
 
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { useIsDesktop } from '@/hooks/useIsDesktop';
 import leaf_BC from '@/assets/leaf_BC.webp';

@@ -1,6 +1,6 @@
 'use client';
 
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { BiShuffle } from 'react-icons/bi';
 import classNames from 'classnames';
@@ -9,6 +9,7 @@ import { handleShuffle } from '@/utils/handleShuffle';
 import { useFindWords } from '@/hooks/useFindWords';
 import { useShowConfetti } from '@/hooks/useShowConfetti';
 import { Button } from '../Button/Button';
+import { showErrorToast, showSuccessToast } from '../CustomToasts/CustomToasts';
 import { Dropdown } from '../Dropdown/Dropdown';
 import { LetterGrid } from '../LetterGrid/LetterGrid';
 import { Level } from '../Level/Level';
@@ -26,7 +27,7 @@ export type LevelT = {
 };
 
 export type Game = {
-  id: string;
+  _id: string;
   letters: string[];
   levels: LevelT[];
   totalScore: number;
@@ -45,7 +46,7 @@ export const Game = ({ game }: GameProps) => {
   const showConfetti = useShowConfetti();
   const [isAnimation, setIsAnimation] = useState(false);
 
-  const { foundWords, setFoundWords, curScore } = useFindWords(game.id, panagrams);
+  const { foundWords, setFoundWords, curScore } = useFindWords(game._id, panagrams);
 
   const triggerAnimation = () => {
     setIsAnimation(true);
@@ -58,11 +59,11 @@ export const Game = ({ game }: GameProps) => {
     );
 
     if (wordInput.length < 4) {
-      toast.error('Wort zu kurz', { icon: '🦊' });
+      showErrorToast('Wort zu kurz');
     } else if (!wordInput.includes(gameLetters[0])) {
-      toast.error('Hauptbuchstabe fehlt', { icon: '🐛' });
+      showErrorToast('Hauptbuchstabe fehlt');
     } else if (!match) {
-      toast.error('Nicht in der Liste :(', { icon: '🍂' });
+      showErrorToast('Nicht in der Liste');
     } else if (match) {
       const isAlreadyFound = foundWords.some(
         (word) => match.word.toLowerCase() === word.toLowerCase()
@@ -72,7 +73,7 @@ export const Game = ({ game }: GameProps) => {
       } else {
         triggerAnimation();
         const scoreToAdd = calcScore(wordInput, panagrams);
-        toast.success(`${scoreToAdd}`, { icon: '🐸' });
+        showSuccessToast(scoreToAdd);
         setFoundWords((prev) => [...prev, match.word]);
       }
     }
