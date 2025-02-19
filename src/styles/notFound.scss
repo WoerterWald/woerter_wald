@@ -13,7 +13,7 @@
 
 .bgTop {
   @include posFixed();
-  background: url(../assets/bg_layer_top.webp) center center/cover no-repeat;
+  background: url(/assets/bg_layer_top.webp) center center/cover no-repeat;
   max-height: 15vw;
   min-height: 15rem;
   z-index: 3;
@@ -21,7 +21,7 @@
 
 .bgCenter {
   @include posFixed();
-  background: url(../assets/bg_layer_center.webp) center center/cover no-repeat;
+  background: url(/assets/bg_layer_center.webp) center center/cover no-repeat;
   z-index: -2;
   transform: scale(1);
 }
@@ -30,7 +30,7 @@
   @include posFixed();
   width: 150%;
   left: -25%;
-  background: url(../assets/bg_layer_background.webp) center center/cover no-repeat;
+  background: url(/assets/bg_layer_background.webp) center center/cover no-repeat;
   z-index: -3;
 }
 

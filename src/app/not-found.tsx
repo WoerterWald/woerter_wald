@@ -1,6 +1,4 @@
 import Image from 'next/image';
-import KodamaBody from '../assets/kodama_body.webp';
-import KodamaHead from '../assets/kodama_head.webp';
 import '../styles/notFound.scss';
 
 export default function NotFound() {
@@ -16,14 +14,14 @@ export default function NotFound() {
       <div className="notFound__kodama">
         <Image
           className="notFound__kodama--head"
-          src={KodamaHead}
+          src="/assets/kodama_head.webp"
           alt="Ein Kodama Kopf"
           width={180}
           height={180}
         />
         <Image
           className="notFound__kodama--body"
-          src={KodamaBody}
+          src="/assets/kodama_body.webp"
           alt="Der Körper eines Kodamas"
           width={180}
           height={180}
