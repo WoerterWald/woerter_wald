@@ -12,20 +12,19 @@ type DropdownProps = {
   panagrams: Word[];
 };
 
-const getRecentGuesses = (foundWords: string[], pangrams: Word[]) => {
-  return foundWords
-    .toReversed()
-    .map((word) => {
-      const isPangram = pangrams.some((pangram) => pangram.word === word);
-      return (
-        <Fragment key={word}>
-          {isPangram ? <span className={styles.panagram}>{word}</span> : word}
-          {', '}
-        </Fragment>
-      );
-    })
-    .concat(<span>...</span>);
+const getRecentGuesses = (foundWords: string[], panagrams: Word[]) => {
+  return foundWords.toReversed().map((word, index, arr) => {
+    const isPanagram = panagrams.some((panagram) => panagram.word === word);
+    const isLastWord = index === arr.length - 1;
+    return (
+      <Fragment key={`guess-${word}`}>
+        {isPanagram ? <span className={styles.panagram}>{word}</span> : word}
+        {!isLastWord && ', '}
+      </Fragment>
+    );
+  });
 };
+
 export const Dropdown = ({ foundWords, panagrams }: DropdownProps) => {
   const [open, setOpen] = useState(false);
 
@@ -41,7 +40,7 @@ export const Dropdown = ({ foundWords, panagrams }: DropdownProps) => {
       >
         {!open ? (
           <>
-            <span>{recentGuesses}</span>
+            <span className={styles.dropdownBtnContent}>{recentGuesses}</span>
             <BiSolidDownArrow className={styles.arrowBtn} />
           </>
         ) : (
@@ -59,7 +58,11 @@ export const Dropdown = ({ foundWords, panagrams }: DropdownProps) => {
             .map((word) => {
               const panagram = panagrams.find((elem) => elem.word === word);
 
-              return panagram ? <p className={styles.panagram}>{word}</p> : <p>{word}</p>;
+              return (
+                <p key={`content-${word}`} className={panagram ? styles.panagram : ''}>
+                  {word}
+                </p>
+              );
             })}
         </div>
       )}

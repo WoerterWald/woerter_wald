@@ -16,6 +16,12 @@
     border-radius: $brad-sm;
     padding: 0.5rem;
 
+    .dropdownBtnContent {
+      text-overflow: ellipsis;
+      text-wrap: nowrap;
+      overflow: hidden;
+    }
+
     .arrowBtn {
       width: 1.3rem;
       height: 1.3rem;
