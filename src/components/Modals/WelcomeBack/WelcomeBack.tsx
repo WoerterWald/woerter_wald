@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { findLevels } from '@/utils/findLevelHelper';
+import { useCountdown } from '@/hooks/useCountdown';
 import { useFindWords } from '@/hooks/useFindWords';
 import { Game, Word } from '@/components/Game/Game';
 import { Modal } from '@/components/ModalWrapper/ModalWrapper';
@@ -11,34 +12,10 @@ type WelcomeBack = {
   panagrams: Word[];
 };
 
-const getSecondsUntilMidnight = () => {
-  const now = Date.now();
-  const midnight = new Date().setHours(24, 0, 0, 0);
-
-  return Math.max(0, Math.floor((midnight - now) / 1000));
-};
-
-function formatTime(seconds: number) {
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-  const secs = seconds % 60;
-  return `${hours}h ${minutes}m ${secs}s`;
-}
-
 export const WelcomeBack = ({ game, panagrams }: WelcomeBack) => {
   const { foundWords, curScore } = useFindWords(game._id, panagrams);
-  const [timeLeft, setTimeLeft] = useState(getSecondsUntilMidnight());
   const { curLevel } = findLevels(game.levels, curScore);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeLeft(getSecondsUntilMidnight());
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+  const formattedTimeLeft = useCountdown();
 
   return (
     <Modal isSmall>
@@ -62,7 +39,7 @@ export const WelcomeBack = ({ game, panagrams }: WelcomeBack) => {
         </p>
         <div>
           <p>Wie viele Wörter findest du noch bis zum nächsten Rätsel in:</p>
-          <p className={styles.countdown}>{formatTime(timeLeft)}</p>
+          <p className={styles.countdown}>{formattedTimeLeft}</p>
         </div>
       </div>
     </Modal>
